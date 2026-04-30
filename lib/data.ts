@@ -162,12 +162,13 @@ export const cities: CityData[] = [
     },
     taxStructure: {
       topBracketRate: 0.5,
-      topBracketThreshold: 74160,
+      topBracketThreshold: 78016,
       ssCapEur: null,
       notes: [
-        "Brackets 16% / 26% / 33% / 39% / 50%",
+        "Brackets 16% / 26% / 33% / 39% / 50%; 50% bracket starts at €78,016 (PwC 2025)",
         "No social security contribution cap; full rates apply at all income levels",
         "Employee SS 22.1%, employer SS 16.1%",
+        "Compulsory flat health contribution €35/month (since Jan 2024)",
         "General tax relief phases down with income",
       ],
     },
@@ -308,10 +309,10 @@ export const cities: CityData[] = [
     },
     taxStructure: {
       topBracketRate: 0.48,
-      topBracketThreshold: 83000,
+      topBracketThreshold: 86634,
       ssCapEur: null,
       notes: [
-        "IRS top bracket 48% above ~€83k",
+        "IRS top bracket 48% above €86,634 (PwC 2026)",
         "Solidarity surcharge 2.5% on €80k–€250k slice; 5% above €250k",
         "Employer Social Security (TSU) 23.75%, uncapped",
         "Employee SS 11%",
@@ -456,11 +457,11 @@ export const cities: CityData[] = [
     },
     taxStructure: {
       topBracketRate: 0.495,
-      topBracketThreshold: 75518,
+      topBracketThreshold: 78426,
       ssCapEur: 71000,
       notes: [
         "Box 1 income tax + Zvw health insurance",
-        "Top bracket 49.5% above ~€75,500",
+        "Top bracket 49.5% above €78,426 (PwC 2026)",
         "Employer SS effectively caps near €71k",
         "30% ruling not applied; with ruling (2024 phasing 30/20/10), €100k single nets ~€68k",
       ],
@@ -730,15 +731,16 @@ export const cities: CityData[] = [
       cappuccino: 5.2,
     },
     taxStructure: {
-      topBracketRate: 0.5607,
-      topBracketThreshold: 78000,
+      topBracketRate: 0.605,
+      topBracketThreshold: 113000,
       ssCapEur: null,
       notes: [
         "AM-bidrag 8% before income tax",
-        "Municipal Copenhagen ~23.65%",
-        "Topskat 15% above DKK 588,900 (~€78k)",
+        "Municipal Copenhagen ~23.65%; bottom-bracket state tax 12.01%",
+        "2026 reform: topskat now 7.5% above DKK 845,543 (~€113k); a new mellemskat 7.5% kicks in at the prior threshold; combined marginal cap 60.5%",
         "Employer SS minimal (~€1,500–3,500/year flat)",
         "Church tax excluded",
+        "Cell values for Copenhagen may not yet reflect the 2026 reform; treat as approximate at the high end",
       ],
     },
   },
