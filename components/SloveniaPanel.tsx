@@ -15,25 +15,25 @@ export function SloveniaPanel() {
   return (
     <Section
       id="slovenia"
-      eyebrow="Slovenia, in particular"
-      title="Why Slovenia's wedge is unusually heavy"
-      lede="Two structural choices — a 50% top bracket from ~€74k and no ceiling on social security — combine to push the effective wedge above 60% at executive comp. Most of Europe applies a cap somewhere."
+      eyebrow="Slovenia"
+      title="A 50% bracket that starts early. No social-security ceiling."
+      lede="Two structural choices push Slovenia's effective wedge above 60% on executive compensation. Most European systems cap social security somewhere; Slovenia does not."
     >
       <div className="grid gap-6 lg:grid-cols-5">
         <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm lg:col-span-3">
           <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
-            Headline stat
+            At a glance
           </p>
           <p className="mt-3 font-serif text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
-            At {formatEUR(salary)} {profile}, your employer spends{" "}
-            <span className="text-amber-600">€{formatNumber(ratio)}</span> to put{" "}
-            <span className="text-amber-600">€1</span> in your pocket.
+            For every <span className="text-amber-600">€1</span> a {profile} employee
+            banks at {formatEUR(salary)} gross, the employer spends{" "}
+            <span className="text-amber-600">€{formatNumber(ratio)}</span>.
           </p>
           <p className="mt-4 text-base leading-relaxed text-slate-600">
-            That ratio comes from {formatEUR(cell.employerCost)} of total employer
-            outlay against {formatEUR(cell.net)} that lands in the bank — a tax wedge of{" "}
-            {formatPercent(cell.wedge)}. Switch the salary or profile above to see how
-            the ratio shifts; the wedge stays above half the way up.
+            That comes from {formatEUR(cell.employerCost)} of total employer outlay
+            against {formatEUR(cell.net)} of net take-home — a wedge of{" "}
+            {formatPercent(cell.wedge)}. Move the salary or profile control to watch
+            the ratio shift; it stays above half across the range.
           </p>
         </div>
         <div className="rounded-xl border-l-4 border-amber-500 bg-amber-50/60 p-6 lg:col-span-2">

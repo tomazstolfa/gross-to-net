@@ -69,8 +69,8 @@ export function ComparisonTable() {
     <Section
       id="table"
       eyebrow="Master comparison"
-      title="The whole table, sortable."
-      lede="Pick a salary point and family profile up top; click any column header to sort by it. Hover a row to preview that city in the four cards above and highlight it in every chart below; click a row to pin it."
+      title="Every city, every metric."
+      lede="Click a column header to sort. Click a row to pin a city — every chart on this page will follow it. Hover for a transient preview."
     >
       <div className="space-y-4">
         <Controls />
