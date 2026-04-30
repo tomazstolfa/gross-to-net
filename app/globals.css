@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-feature-settings: "ss01", "cv11";
+  }
+  :where(h1, h2, h3, h4) {
+    font-family: var(--font-source-serif), ui-serif, Georgia, serif;
+    color: rgb(15 23 42);
+  }
+  :where([id]) {
+    scroll-margin-top: 5rem;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
