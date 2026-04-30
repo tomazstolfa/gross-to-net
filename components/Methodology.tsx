@@ -142,6 +142,13 @@ export function Methodology() {
               a toggle.
             </li>
             <li>
+              <strong className="text-stone-900">€50k row is interpolated.</strong>{" "}
+              The €70k–€250k cells are sourced; the €50k row is extrapolated
+              downward using each city&apos;s structural ratios (employer-cost-to-gross
+              held constant; net-to-gross given a small bracket-aware bump). Treat the
+              €50k values as approximate.
+            </li>
+            <li>
               <strong className="text-stone-900">Estonia.</strong> The 24% rate planned
               for 2026 was cancelled by the Riigikogu in December 2025. The 22% flat
               rate is used.

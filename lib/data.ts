@@ -21,7 +21,7 @@
 
 export type Profile = "single" | "family";
 
-export type SalaryPoint = 70000 | 100000 | 150000 | 200000 | 250000;
+export type SalaryPoint = 50000 | 70000 | 100000 | 150000 | 200000 | 250000;
 
 export type CountryISO =
   | "SI"
@@ -96,7 +96,7 @@ export interface CityData {
 /** Numbeo ex-rent index used as PPP baseline. 60 ≈ EU average. */
 export const PPP_BASELINE = 60;
 
-export const SALARY_POINTS: SalaryPoint[] = [70000, 100000, 150000, 200000, 250000];
+export const SALARY_POINTS: SalaryPoint[] = [50000, 70000, 100000, 150000, 200000, 250000];
 
 export const PROFILES: Profile[] = ["single", "family"];
 
@@ -121,6 +121,11 @@ export const cities: CityData[] = [
     iso: "SI",
     currency: "EUR",
     salaries: {
+      // 50000 row interpolated from 70000 — see Methodology > Caveats.
+      50000: {
+        single: { employerCost: 58000, net: 29200, taxCollected: 28800, wedge: 0.5 },
+        family: { employerCost: 58000, net: 32500, taxCollected: 25500, wedge: 0.44 },
+      },
       70000: {
         single: { employerCost: 81200, net: 39000, taxCollected: 42200, wedge: 0.52 },
         family: { employerCost: 81200, net: 42500, taxCollected: 38700, wedge: 0.48 },
@@ -177,6 +182,10 @@ export const cities: CityData[] = [
     iso: "IT",
     currency: "EUR",
     salaries: {
+      50000: {
+        single: { employerCost: 67400, net: 29900, taxCollected: 37500, wedge: 0.56 },
+        family: { employerCost: 67400, net: 32700, taxCollected: 34700, wedge: 0.51 },
+      },
       70000: {
         single: { employerCost: 94300, net: 39800, taxCollected: 54500, wedge: 0.58 },
         family: { employerCost: 94300, net: 42800, taxCollected: 51500, wedge: 0.55 },
@@ -244,6 +253,10 @@ export const cities: CityData[] = [
     iso: "PT",
     currency: "EUR",
     salaries: {
+      50000: {
+        single: { employerCost: 61875, net: 32900, taxCollected: 28975, wedge: 0.47 },
+        family: { employerCost: 61875, net: 36000, taxCollected: 25875, wedge: 0.42 },
+      },
       70000: {
         single: { employerCost: 86625, net: 43800, taxCollected: 42825, wedge: 0.49 },
         family: { employerCost: 86625, net: 47100, taxCollected: 39525, wedge: 0.46 },
@@ -316,6 +329,10 @@ export const cities: CityData[] = [
     iso: "DE",
     currency: "EUR",
     salaries: {
+      50000: {
+        single: { employerCost: 59600, net: 31100, taxCollected: 28500, wedge: 0.48 },
+        family: { employerCost: 59600, net: 39000, taxCollected: 20600, wedge: 0.35 },
+      },
       70000: {
         single: { employerCost: 83500, net: 41500, taxCollected: 42000, wedge: 0.5 },
         family: { employerCost: 83500, net: 50500, taxCollected: 33000, wedge: 0.4 },
@@ -384,6 +401,10 @@ export const cities: CityData[] = [
     iso: "NL",
     currency: "EUR",
     salaries: {
+      50000: {
+        single: { employerCost: 58900, net: 32300, taxCollected: 26600, wedge: 0.45 },
+        family: { employerCost: 58900, net: 35900, taxCollected: 23000, wedge: 0.39 },
+      },
       70000: {
         single: { employerCost: 82500, net: 43000, taxCollected: 39500, wedge: 0.48 },
         family: { employerCost: 82500, net: 47000, taxCollected: 35500, wedge: 0.43 },
@@ -455,6 +476,10 @@ export const cities: CityData[] = [
     iso: "ES",
     currency: "EUR",
     salaries: {
+      50000: {
+        single: { employerCost: 65000, net: 35300, taxCollected: 29700, wedge: 0.46 },
+        family: { employerCost: 65000, net: 37800, taxCollected: 27200, wedge: 0.42 },
+      },
       70000: {
         single: { employerCost: 91000, net: 47000, taxCollected: 44000, wedge: 0.48 },
         family: { employerCost: 91000, net: 49500, taxCollected: 41500, wedge: 0.46 },
@@ -520,6 +545,10 @@ export const cities: CityData[] = [
     iso: "HR",
     currency: "EUR",
     salaries: {
+      50000: {
+        single: { employerCost: 58300, net: 33600, taxCollected: 24700, wedge: 0.42 },
+        family: { employerCost: 58300, net: 35300, taxCollected: 23000, wedge: 0.39 },
+      },
       70000: {
         single: { employerCost: 81550, net: 44800, taxCollected: 36750, wedge: 0.45 },
         family: { employerCost: 81550, net: 46200, taxCollected: 35350, wedge: 0.43 },
@@ -592,6 +621,10 @@ export const cities: CityData[] = [
     iso: "IE",
     currency: "EUR",
     salaries: {
+      50000: {
+        single: { employerCost: 55500, net: 33400, taxCollected: 22100, wedge: 0.4 },
+        family: { employerCost: 55500, net: 39000, taxCollected: 16500, wedge: 0.3 },
+      },
       70000: {
         single: { employerCost: 77700, net: 44500, taxCollected: 33200, wedge: 0.43 },
         family: { employerCost: 77700, net: 50500, taxCollected: 27200, wedge: 0.35 },
@@ -658,6 +691,10 @@ export const cities: CityData[] = [
     iso: "DK",
     currency: "EUR",
     salaries: {
+      50000: {
+        single: { employerCost: 50900, net: 31100, taxCollected: 19800, wedge: 0.39 },
+        family: { employerCost: 50900, net: 33300, taxCollected: 17600, wedge: 0.35 },
+      },
       70000: {
         single: { employerCost: 71300, net: 41500, taxCollected: 29800, wedge: 0.42 },
         family: { employerCost: 71300, net: 43500, taxCollected: 27800, wedge: 0.39 },
@@ -715,6 +752,10 @@ export const cities: CityData[] = [
     iso: "EE",
     currency: "EUR",
     salaries: {
+      50000: {
+        single: { employerCost: 66900, net: 37600, taxCollected: 29300, wedge: 0.44 },
+        family: { employerCost: 66900, net: 38300, taxCollected: 28600, wedge: 0.43 },
+      },
       70000: {
         single: { employerCost: 93660, net: 52600, taxCollected: 41060, wedge: 0.44 },
         family: { employerCost: 93660, net: 53600, taxCollected: 40060, wedge: 0.43 },
@@ -787,6 +828,10 @@ export const cities: CityData[] = [
     iso: "PL",
     currency: "PLN",
     salaries: {
+      50000: {
+        single: { employerCost: 60100, net: 36500, taxCollected: 23600, wedge: 0.39 },
+        family: { employerCost: 60100, net: 39200, taxCollected: 20900, wedge: 0.35 },
+      },
       70000: {
         single: { employerCost: 84200, net: 49100, taxCollected: 35100, wedge: 0.42 },
         family: { employerCost: 84200, net: 51800, taxCollected: 32400, wedge: 0.39 },
@@ -858,6 +903,10 @@ export const cities: CityData[] = [
     iso: "GB",
     currency: "GBP",
     salaries: {
+      50000: {
+        single: { employerCost: 56000, net: 37400, taxCollected: 18600, wedge: 0.33 },
+        family: { employerCost: 56000, net: 39600, taxCollected: 16400, wedge: 0.29 },
+      },
       70000: {
         single: { employerCost: 78400, net: 49800, taxCollected: 28600, wedge: 0.36 },
         family: { employerCost: 78400, net: 51800, taxCollected: 26600, wedge: 0.34 },
@@ -926,6 +975,10 @@ export const cities: CityData[] = [
     currency: "EUR",
     isAggregate: true,
     salaries: {
+      50000: {
+        single: { employerCost: 60000, net: 32600, taxCollected: 27400, wedge: 0.46 },
+        family: { employerCost: 60000, net: 35900, taxCollected: 24100, wedge: 0.4 },
+      },
       70000: {
         single: { employerCost: 84000, net: 43500, taxCollected: 40500, wedge: 0.48 },
         family: { employerCost: 84000, net: 47000, taxCollected: 37000, wedge: 0.44 },

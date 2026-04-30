@@ -20,8 +20,8 @@ const STONE_700 = "#44403c";
 const EMERALD_400 = "#34d399";
 
 export function ProgressiveCurve() {
-  const { profile, effectiveSlug } = useHighlight();
-  const city: CityData = findCity(effectiveSlug) ?? findCity("Ljubljana")!;
+  const { profile, selectedSlug } = useHighlight();
+  const city: CityData = findCity(selectedSlug) ?? findCity("Ljubljana")!;
 
   const chartData = useMemo(
     () =>
@@ -69,8 +69,9 @@ export function ProgressiveCurve() {
             <XAxis
               dataKey="salary"
               type="number"
-              domain={[70000, 250000]}
+              domain={[50000, 250000]}
               ticks={[...SALARY_POINTS]}
+              interval={0}
               tickFormatter={(v) => formatEURCompact(v)}
               tick={{ fontSize: 12, fill: "#78716c" }}
               tickLine={false}

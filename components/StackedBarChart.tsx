@@ -21,9 +21,12 @@ const STONE_400 = "#a8a29e";
 const STONE_700 = "#44403c";
 const EMERALD_500 = "#10b981";
 const EMERALD_300 = "#6ee7b7";
+const SKY_300 = "#7dd3fc";
+const SKY_600 = "#0284c7";
 
 export function StackedBarChart() {
-  const { salary, profile, effectiveSlug, setHoveredSlug } = useHighlight();
+  const { salary, profile, selectedSlug, hoveredSlug, setHoveredSlug } =
+    useHighlight();
 
   const chartData = useMemo(() => {
     const arr = realCities().map((c) => {
@@ -83,12 +86,12 @@ export function StackedBarChart() {
               }
               onMouseLeave={() => setHoveredSlug(null)}
             >
-              {chartData.map((d) => (
-                <Cell
-                  key={`net-${d.name}`}
-                  fill={d.name === effectiveSlug ? EMERALD_300 : STONE_400}
-                />
-              ))}
+              {chartData.map((d) => {
+                const isPinned = d.name === selectedSlug;
+                const isHovered = !isPinned && d.name === hoveredSlug;
+                const fill = isPinned ? EMERALD_300 : isHovered ? SKY_300 : STONE_400;
+                return <Cell key={`net-${d.name}`} fill={fill} />;
+              })}
             </Bar>
             <Bar
               dataKey="tax"
@@ -99,12 +102,12 @@ export function StackedBarChart() {
               }
               onMouseLeave={() => setHoveredSlug(null)}
             >
-              {chartData.map((d) => (
-                <Cell
-                  key={`tax-${d.name}`}
-                  fill={d.name === effectiveSlug ? EMERALD_500 : STONE_700}
-                />
-              ))}
+              {chartData.map((d) => {
+                const isPinned = d.name === selectedSlug;
+                const isHovered = !isPinned && d.name === hoveredSlug;
+                const fill = isPinned ? EMERALD_500 : isHovered ? SKY_600 : STONE_700;
+                return <Cell key={`tax-${d.name}`} fill={fill} />;
+              })}
             </Bar>
           </BarChart>
         </ResponsiveContainer>
@@ -120,7 +123,9 @@ function Legend() {
       <Swatch color={STONE_700} label="Tax collected" />
       <Swatch color={STONE_400} label="Net take-home" />
       <span className="text-stone-400">·</span>
-      <span className="text-emerald-700">Emerald: pinned city</span>
+      <span className="text-emerald-700">Emerald: pinned</span>
+      <span className="text-stone-400">·</span>
+      <span className="text-sky-700">Sky: hovered</span>
     </div>
   );
 }
