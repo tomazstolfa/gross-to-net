@@ -87,15 +87,15 @@ export function Methodology() {
           <ul className="grid gap-1.5 sm:grid-cols-2">
             {SOURCES.map((s) => (
               <li key={s.name} className="flex gap-2 text-sm">
-                <span className="text-slate-400">·</span>
+                <span className="text-stone-400">·</span>
                 <a
                   href={s.url}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="text-slate-700 underline-offset-2 transition hover:text-amber-700 hover:underline"
+                  className="text-stone-700 underline-offset-2 transition hover:text-emerald-700 hover:underline"
                 >
                   {s.name}
-                  <span aria-hidden className="ml-1 text-slate-400">
+                  <span aria-hidden className="ml-1 text-stone-400">
                     ↗
                   </span>
                 </a>
@@ -105,11 +105,11 @@ export function Methodology() {
         </Detail>
         <Detail summary="Profiles">
           <p>
-            <strong className="text-slate-900">Single.</strong> One earner, age 30, no
+            <strong className="text-stone-900">Single.</strong> One earner, age 30, no
             children, standard employment contract, no expat or researcher regime.
           </p>
           <p>
-            <strong className="text-slate-900">Family.</strong> Married single-earner
+            <strong className="text-stone-900">Family.</strong> Married single-earner
             with two children under 12. Spousal allowances and child-related credits
             applied where they form part of the standard regime — e.g. German
             Ehegattensplitting plus Kindergeld, Irish home-carer credit, Slovenian
@@ -136,23 +136,23 @@ export function Methodology() {
         <Detail summary="Caveats">
           <ul className="space-y-2">
             <li>
-              <strong className="text-slate-900">Special regimes are excluded.</strong>{" "}
+              <strong className="text-stone-900">Special regimes are excluded.</strong>{" "}
               No NL 30% ruling, no ES Beckham law, no IT impatriati, no PL IP-Box.
               These materially change the picture for many readers and will arrive as
               a toggle.
             </li>
             <li>
-              <strong className="text-slate-900">Estonia.</strong> The 24% rate planned
+              <strong className="text-stone-900">Estonia.</strong> The 24% rate planned
               for 2026 was cancelled by the Riigikogu in December 2025. The 22% flat
               rate is used.
             </li>
             <li>
-              <strong className="text-slate-900">Employer social security</strong> uses
+              <strong className="text-stone-900">Employer social security</strong> uses
               statutory rates. In regimes with a cap (DE, NL, ES, PL, HR) the cap is
               honoured; any solidarity-style charge above it is included.
             </li>
             <li>
-              <strong className="text-slate-900">Excluded.</strong> Church tax (DE,
+              <strong className="text-stone-900">Excluded.</strong> Church tax (DE,
               DK), supplementary private health, and equity compensation.
             </li>
           </ul>
@@ -171,14 +171,14 @@ export function Methodology() {
 
 function Detail({ summary, children }: { summary: string; children: React.ReactNode }) {
   return (
-    <details className="group rounded-xl border border-slate-200 bg-white shadow-sm">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-medium text-slate-900">
+    <details className="group rounded-xl border border-stone-200 bg-white shadow-sm">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-medium text-stone-900">
         <span>{summary}</span>
-        <span aria-hidden className="text-slate-400 transition group-open:rotate-180">
+        <span aria-hidden className="text-stone-400 transition group-open:rotate-180">
           ⌄
         </span>
       </summary>
-      <div className="space-y-3 border-t border-slate-100 px-5 py-4 text-sm leading-relaxed text-slate-600">
+      <div className="space-y-3 border-t border-stone-100 px-5 py-4 text-sm leading-relaxed text-stone-600">
         {children}
       </div>
     </details>

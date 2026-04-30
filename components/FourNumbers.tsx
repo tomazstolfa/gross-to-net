@@ -46,7 +46,7 @@ export function FourNumbers() {
         <>
           <CityPicker variant="inline" />
           {hoveredSlug && hoveredSlug !== city.name && (
-            <span className="ml-2 text-amber-700">— previewing {hoveredSlug}</span>
+            <span className="ml-2 text-emerald-700">— previewing {hoveredSlug}</span>
           )}
         </>
       }
@@ -54,13 +54,13 @@ export function FourNumbers() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {cards.map((c) => (
           <Card key={c.label}>
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <p className="text-xs font-semibold uppercase tracking-wider text-stone-500">
               {c.label}
             </p>
-            <p className="mt-3 font-serif text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
+            <p className="mt-3 font-serif text-3xl font-semibold leading-tight text-stone-900 sm:text-4xl">
               {c.value}
             </p>
-            <p className="mt-3 text-sm leading-relaxed text-slate-600">{c.blurb}</p>
+            <p className="mt-3 text-sm leading-relaxed text-stone-600">{c.blurb}</p>
           </Card>
         ))}
       </div>

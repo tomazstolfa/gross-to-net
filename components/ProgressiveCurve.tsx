@@ -16,8 +16,8 @@ import { Controls } from "./ui/Controls";
 import { findCity, SALARY_POINTS, type CityData } from "@/lib/data";
 import { formatEUR, formatEURCompact, formatPercent } from "@/lib/format";
 
-const SLATE_700 = "#334155";
-const AMBER_400 = "#fbbf24";
+const STONE_700 = "#44403c";
+const EMERALD_400 = "#34d399";
 
 export function ProgressiveCurve() {
   const { profile, effectiveSlug } = useHighlight();
@@ -29,6 +29,8 @@ export function ProgressiveCurve() {
         const cell = city.salaries[point][profile];
         return {
           salary: point,
+          netShare: cell.net / cell.employerCost,
+          taxShare: cell.taxCollected / cell.employerCost,
           net: cell.net,
           tax: cell.taxCollected,
           employerCost: cell.employerCost,
@@ -42,66 +44,69 @@ export function ProgressiveCurve() {
     <Section
       id="progressive"
       eyebrow="Progressivity"
-      title="How the breakdown shifts as gross rises."
-      lede={`Net take-home and tax collected, stacked to total employer cost across the five salary points. Showing ${city.name}, ${city.country}.`}
+      title="How the share of total cost shifts as gross rises."
+      lede={`Each bar of total employer cost split into net take-home and tax collected. The higher the gross, the smaller the slice the employee actually keeps. Showing ${city.name}, ${city.country}.`}
     >
       <Controls className="mb-6" showSalary={false} />
-      <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+      <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm sm:p-6">
         <ResponsiveContainer width="100%" height={460}>
           <AreaChart
             data={chartData}
             margin={{ top: 16, right: 24, bottom: 24, left: 12 }}
+            stackOffset="expand"
           >
             <defs>
               <linearGradient id="netFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={AMBER_400} stopOpacity={0.95} />
-                <stop offset="100%" stopColor={AMBER_400} stopOpacity={0.7} />
+                <stop offset="0%" stopColor={EMERALD_400} stopOpacity={0.95} />
+                <stop offset="100%" stopColor={EMERALD_400} stopOpacity={0.7} />
               </linearGradient>
               <linearGradient id="taxFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={SLATE_700} stopOpacity={0.9} />
-                <stop offset="100%" stopColor={SLATE_700} stopOpacity={0.75} />
+                <stop offset="0%" stopColor={STONE_700} stopOpacity={0.9} />
+                <stop offset="100%" stopColor={STONE_700} stopOpacity={0.75} />
               </linearGradient>
             </defs>
-            <CartesianGrid stroke="#e2e8f0" vertical={false} />
+            <CartesianGrid stroke="#e7e5e4" vertical={false} />
             <XAxis
               dataKey="salary"
               type="number"
               domain={[70000, 250000]}
               ticks={[...SALARY_POINTS]}
               tickFormatter={(v) => formatEURCompact(v)}
-              tick={{ fontSize: 12, fill: "#64748b" }}
+              tick={{ fontSize: 12, fill: "#78716c" }}
               tickLine={false}
-              axisLine={{ stroke: "#cbd5e1" }}
+              axisLine={{ stroke: "#d6d3d1" }}
             />
             <YAxis
-              tickFormatter={(v) => formatEURCompact(v)}
-              tick={{ fontSize: 12, fill: "#64748b" }}
+              tickFormatter={(v) => formatPercent(v)}
+              domain={[0, 1]}
+              ticks={[0, 0.25, 0.5, 0.75, 1]}
+              tick={{ fontSize: 12, fill: "#78716c" }}
               tickLine={false}
-              axisLine={{ stroke: "#cbd5e1" }}
-              width={64}
+              axisLine={{ stroke: "#d6d3d1" }}
+              width={48}
             />
             <Tooltip
               content={<AreaTooltip />}
-              cursor={{ stroke: "#cbd5e1", strokeDasharray: "3 3" }}
+              cursor={{ stroke: "#d6d3d1", strokeDasharray: "3 3" }}
             />
             <Area
               type="monotone"
-              dataKey="net"
+              dataKey="netShare"
               stackId="1"
-              stroke="#f59e0b"
+              stroke="#10b981"
               strokeWidth={1.5}
               fill="url(#netFill)"
-              name="Net take-home"
+              name="Net share"
               isAnimationActive={false}
             />
             <Area
               type="monotone"
-              dataKey="tax"
+              dataKey="taxShare"
               stackId="1"
-              stroke="#1e293b"
+              stroke="#292524"
               strokeWidth={1.5}
               fill="url(#taxFill)"
-              name="Tax collected"
+              name="Tax share"
               isAnimationActive={false}
             />
           </AreaChart>
@@ -114,11 +119,11 @@ export function ProgressiveCurve() {
 
 function Legend() {
   return (
-    <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-600">
-      <Swatch color={SLATE_700} label="Tax collected" />
-      <Swatch color={AMBER_400} label="Net take-home" />
-      <span className="text-slate-400">·</span>
-      <span>Total height = employer cost.</span>
+    <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-stone-600">
+      <Swatch color={STONE_700} label="Tax collected" />
+      <Swatch color={EMERALD_400} label="Net take-home" />
+      <span className="text-stone-400">·</span>
+      <span>Each column = 100% of employer cost.</span>
     </div>
   );
 }
@@ -142,6 +147,8 @@ type TooltipProps = {
   payload?: Array<{
     payload: {
       salary: number;
+      netShare: number;
+      taxShare: number;
       net: number;
       tax: number;
       employerCost: number;
@@ -154,14 +161,20 @@ function AreaTooltip({ active, label, payload }: TooltipProps) {
   if (!active || !payload?.length) return null;
   const d = payload[0].payload;
   return (
-    <div className="rounded-md border border-slate-200 bg-white p-3 text-xs shadow-md">
-      <p className="mb-1 font-semibold text-slate-900">
+    <div className="rounded-md border border-stone-200 bg-white p-3 text-xs shadow-md">
+      <p className="mb-1 font-semibold text-stone-900">
         Gross {label ? formatEURCompact(label) : ""}
       </p>
-      <Row label="Employer cost" value={formatEUR(d.employerCost)} bold />
-      <Row label="Tax collected" value={formatEUR(d.tax)} />
-      <Row label="Net take-home" value={formatEUR(d.net)} />
-      <Row label="Wedge" value={formatPercent(d.wedge)} />
+      <Row
+        label="Net share"
+        value={`${formatPercent(d.netShare)} · ${formatEUR(d.net)}`}
+        bold
+      />
+      <Row
+        label="Tax share"
+        value={`${formatPercent(d.taxShare)} · ${formatEUR(d.tax)}`}
+      />
+      <Row label="Employer cost" value={formatEUR(d.employerCost)} />
     </div>
   );
 }
@@ -178,7 +191,7 @@ function Row({
   return (
     <div
       className={`flex justify-between gap-6 ${
-        bold ? "font-semibold text-slate-900" : "text-slate-600"
+        bold ? "font-semibold text-stone-900" : "text-stone-600"
       }`}
     >
       <span>{label}</span>

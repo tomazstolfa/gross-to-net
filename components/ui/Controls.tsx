@@ -28,7 +28,7 @@ export function Controls({ className = "", showSalary = true }: ControlsProps) {
 
   return (
     <div
-      className={`flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5 lg:flex-row lg:flex-wrap lg:items-end lg:gap-6 ${className}`}
+      className={`flex flex-col gap-4 rounded-xl border border-stone-200 bg-white p-4 shadow-sm sm:p-5 lg:flex-row lg:flex-wrap lg:items-end lg:gap-6 ${className}`}
     >
       {showSalary && <SegmentedSalary value={salary} onChange={setSalary} />}
       <SegmentedProfile value={profile} onChange={setProfile} />
@@ -46,11 +46,11 @@ function SegmentedSalary({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <span className="text-[11px] font-semibold uppercase tracking-widest text-slate-500">
+      <span className="text-[11px] font-semibold uppercase tracking-widest text-stone-500">
         Gross salary
       </span>
       <div
-        className="inline-flex flex-wrap rounded-lg border border-slate-200 bg-slate-100 p-1"
+        className="inline-flex flex-wrap rounded-lg border border-stone-200 bg-stone-100 p-1"
         role="radiogroup"
         aria-label="Salary point"
       >
@@ -65,8 +65,8 @@ function SegmentedSalary({
               onClick={() => onChange(s)}
               className={`rounded-md px-3 py-1.5 text-sm font-semibold tabular-nums transition ${
                 active
-                  ? "bg-slate-900 text-white shadow"
-                  : "text-slate-600 hover:bg-white hover:text-slate-900"
+                  ? "bg-stone-900 text-white shadow"
+                  : "text-stone-600 hover:bg-white hover:text-stone-900"
               }`}
             >
               {formatEURCompact(s)}
@@ -87,11 +87,11 @@ function SegmentedProfile({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <span className="text-[11px] font-semibold uppercase tracking-widest text-slate-500">
+      <span className="text-[11px] font-semibold uppercase tracking-widest text-stone-500">
         Profile
       </span>
       <div
-        className="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-1"
+        className="inline-flex rounded-lg border border-stone-200 bg-stone-100 p-1"
         role="radiogroup"
         aria-label="Family profile"
       >
@@ -106,8 +106,8 @@ function SegmentedProfile({
               onClick={() => onChange(p)}
               className={`rounded-md px-3 py-1.5 text-sm font-semibold capitalize transition ${
                 active
-                  ? "bg-slate-900 text-white shadow"
-                  : "text-slate-600 hover:bg-white hover:text-slate-900"
+                  ? "bg-stone-900 text-white shadow"
+                  : "text-stone-600 hover:bg-white hover:text-stone-900"
               }`}
             >
               {p === "single" ? "Single" : "Family"}
@@ -130,7 +130,7 @@ function CitySelect({
     <div className="flex flex-col gap-2 lg:min-w-[16rem] lg:flex-1">
       <label
         htmlFor="city-select"
-        className="text-[11px] font-semibold uppercase tracking-widest text-slate-500"
+        className="text-[11px] font-semibold uppercase tracking-widest text-stone-500"
       >
         Pinned city
       </label>
@@ -139,7 +139,7 @@ function CitySelect({
           id="city-select"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full appearance-none cursor-pointer rounded-lg border border-amber-300 bg-amber-50/40 px-3 py-2 pr-9 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-amber-50 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200"
+          className="w-full appearance-none cursor-pointer rounded-lg border border-emerald-300 bg-emerald-50/40 px-3 py-2 pr-9 text-sm font-semibold text-stone-900 shadow-sm transition hover:bg-emerald-50 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200"
         >
           {cities.map((c) => (
             <option key={c.name} value={c.name}>
@@ -149,7 +149,7 @@ function CitySelect({
         </select>
         <span
           aria-hidden
-          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-amber-600"
+          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-emerald-600"
         >
           ▾
         </span>
