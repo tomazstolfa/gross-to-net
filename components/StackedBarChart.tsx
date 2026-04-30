@@ -13,6 +13,7 @@ import {
 } from "recharts";
 import { Section } from "./ui/Section";
 import { useHighlight } from "./ui/HighlightContext";
+import { Controls } from "./ui/Controls";
 import { realCities } from "@/lib/data";
 import { formatEUR, formatEURCompact, formatPercent } from "@/lib/format";
 
@@ -22,7 +23,7 @@ const AMBER_500 = "#f59e0b";
 const AMBER_300 = "#fcd34d";
 
 export function StackedBarChart() {
-  const { salary, profile, hoveredSlug, setHoveredSlug } = useHighlight();
+  const { salary, profile, effectiveSlug, setHoveredSlug } = useHighlight();
 
   const chartData = useMemo(() => {
     const arr = realCities().map((c) => {
@@ -45,8 +46,9 @@ export function StackedBarChart() {
       id="stacked"
       eyebrow="Where the money goes"
       title="Tax + net = employer cost."
-      lede="Each bar is one city's annual employer cost, broken into the state's take and your take. Sorted by total cost. Hover to highlight."
+      lede="Each bar is one city's annual employer cost, broken into the state's take and your take. Sorted by total cost. Hover to preview, click in the table to pin."
     >
+      <Controls className="mb-6" />
       <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
         <ResponsiveContainer width="100%" height={420}>
           <BarChart
@@ -84,7 +86,7 @@ export function StackedBarChart() {
               {chartData.map((d) => (
                 <Cell
                   key={`net-${d.name}`}
-                  fill={d.name === hoveredSlug ? AMBER_300 : SLATE_400}
+                  fill={d.name === effectiveSlug ? AMBER_300 : SLATE_400}
                 />
               ))}
             </Bar>
@@ -100,7 +102,7 @@ export function StackedBarChart() {
               {chartData.map((d) => (
                 <Cell
                   key={`tax-${d.name}`}
-                  fill={d.name === hoveredSlug ? AMBER_500 : SLATE_700}
+                  fill={d.name === effectiveSlug ? AMBER_500 : SLATE_700}
                 />
               ))}
             </Bar>
