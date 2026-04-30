@@ -123,14 +123,19 @@ export function ComparisonTable() {
                 const cell = city.salaries[salary][profile];
                 const realNet = realNetPpp(cell, city.col);
                 const eurPerNet = eurPerEuroNet(cell);
+                const isPinned = selectedSlug === city.name;
                 const isHovered = hoveredSlug === city.name;
-                const isSelected = selectedSlug === city.name && !hoveredSlug;
                 const isAggregate = city.isAggregate ?? false;
-                const rowTone = isHovered
-                  ? "bg-amber-50"
-                  : isSelected
-                    ? "bg-amber-50/40"
+                const rowBase = isPinned
+                  ? "bg-amber-50 ring-2 ring-inset ring-amber-400"
+                  : isHovered
+                    ? "bg-slate-100"
                     : "hover:bg-slate-50";
+                const stickyBg = isPinned
+                  ? "bg-amber-50"
+                  : isHovered
+                    ? "bg-slate-100"
+                    : "bg-white";
                 return (
                   <tr
                     key={city.name}
@@ -140,32 +145,33 @@ export function ComparisonTable() {
                     onBlur={() => setHoveredSlug(null)}
                     onClick={() => setSelectedSlug(city.name)}
                     tabIndex={0}
+                    aria-pressed={isPinned}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
                         setSelectedSlug(city.name);
                       }
                     }}
-                    className={`cursor-pointer outline-none transition-colors ${rowTone} ${
+                    className={`cursor-pointer outline-none transition-colors ${rowBase} ${
                       isAggregate ? "italic text-slate-500" : "text-slate-700"
                     }`}
                   >
                     <td
-                      className={`sticky left-0 z-10 whitespace-nowrap px-4 py-3 font-medium ${
-                        isHovered
-                          ? "bg-amber-50 text-amber-900"
-                          : isSelected
-                            ? "bg-amber-50/40 text-slate-900"
+                      className={`sticky left-0 z-10 whitespace-nowrap px-4 py-3 font-medium ${stickyBg} ${
+                        isPinned
+                          ? "border-l-4 border-amber-500 pl-3 text-slate-900"
+                          : isHovered
+                            ? "text-slate-900"
                             : isAggregate
-                              ? "bg-white"
-                              : "bg-white text-slate-900"
+                              ? ""
+                              : "text-slate-900"
                       }`}
                     >
                       <div className="flex items-center gap-2">
                         {city.name}
-                        {isSelected && (
-                          <span className="rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-700">
-                            pinned
+                        {isPinned && (
+                          <span className="rounded-full bg-amber-500 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">
+                            ★ pinned
                           </span>
                         )}
                         {isAggregate && (
