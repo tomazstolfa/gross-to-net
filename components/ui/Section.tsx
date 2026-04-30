@@ -18,16 +18,16 @@ export function Section({ id, children, className = "", eyebrow, title, lede }: 
       {(eyebrow || title || lede) && (
         <header className="mb-10 max-w-3xl">
           {eyebrow && (
-            <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-slate-500">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-stone-500">
               {eyebrow}
             </p>
           )}
           {title && (
-            <h2 className="font-serif text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
+            <h2 className="font-serif text-3xl font-semibold leading-tight text-stone-900 sm:text-4xl">
               {title}
             </h2>
           )}
-          {lede && <p className="mt-3 text-base text-slate-600 sm:text-lg">{lede}</p>}
+          {lede && <p className="mt-3 text-base text-stone-600 sm:text-lg">{lede}</p>}
         </header>
       )}
       {children}

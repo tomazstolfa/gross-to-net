@@ -33,7 +33,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${inter.variable} ${sourceSerif.variable}`}>
-      <body className="bg-slate-50 font-sans text-slate-700 antialiased">
+      <body className="bg-stone-50 font-sans text-stone-700 antialiased">
         <HighlightProvider>{children}</HighlightProvider>
       </body>
     </html>

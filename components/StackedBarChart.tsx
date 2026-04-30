@@ -17,10 +17,10 @@ import { Controls } from "./ui/Controls";
 import { realCities } from "@/lib/data";
 import { formatEUR, formatEURCompact, formatPercent } from "@/lib/format";
 
-const SLATE_400 = "#94a3b8";
-const SLATE_700 = "#334155";
-const AMBER_500 = "#f59e0b";
-const AMBER_300 = "#fcd34d";
+const STONE_400 = "#a8a29e";
+const STONE_700 = "#44403c";
+const EMERALD_500 = "#10b981";
+const EMERALD_300 = "#6ee7b7";
 
 export function StackedBarChart() {
   const { salary, profile, effectiveSlug, setHoveredSlug } = useHighlight();
@@ -49,18 +49,18 @@ export function StackedBarChart() {
       lede="Bottom: net take-home. Top: tax collected. Sorted by total employer cost."
     >
       <Controls className="mb-6" />
-      <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+      <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm sm:p-6">
         <ResponsiveContainer width="100%" height={420}>
           <BarChart
             data={chartData}
             margin={{ top: 12, right: 12, bottom: 56, left: 12 }}
           >
-            <CartesianGrid stroke="#e2e8f0" vertical={false} />
+            <CartesianGrid stroke="#e7e5e4" vertical={false} />
             <XAxis
               dataKey="name"
-              tick={{ fontSize: 12, fill: "#64748b" }}
+              tick={{ fontSize: 12, fill: "#78716c" }}
               tickLine={false}
-              axisLine={{ stroke: "#cbd5e1" }}
+              axisLine={{ stroke: "#d6d3d1" }}
               angle={-30}
               textAnchor="end"
               interval={0}
@@ -68,12 +68,12 @@ export function StackedBarChart() {
             />
             <YAxis
               tickFormatter={(v) => formatEURCompact(v)}
-              tick={{ fontSize: 12, fill: "#64748b" }}
+              tick={{ fontSize: 12, fill: "#78716c" }}
               tickLine={false}
-              axisLine={{ stroke: "#cbd5e1" }}
+              axisLine={{ stroke: "#d6d3d1" }}
               width={72}
             />
-            <Tooltip content={<CustomTooltip />} cursor={{ fill: "#f1f5f9" }} />
+            <Tooltip content={<CustomTooltip />} cursor={{ fill: "#f5f5f4" }} />
             <Bar
               dataKey="net"
               stackId="cost"
@@ -86,7 +86,7 @@ export function StackedBarChart() {
               {chartData.map((d) => (
                 <Cell
                   key={`net-${d.name}`}
-                  fill={d.name === effectiveSlug ? AMBER_300 : SLATE_400}
+                  fill={d.name === effectiveSlug ? EMERALD_300 : STONE_400}
                 />
               ))}
             </Bar>
@@ -102,7 +102,7 @@ export function StackedBarChart() {
               {chartData.map((d) => (
                 <Cell
                   key={`tax-${d.name}`}
-                  fill={d.name === effectiveSlug ? AMBER_500 : SLATE_700}
+                  fill={d.name === effectiveSlug ? EMERALD_500 : STONE_700}
                 />
               ))}
             </Bar>
@@ -116,11 +116,11 @@ export function StackedBarChart() {
 
 function Legend() {
   return (
-    <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-600">
-      <Swatch color={SLATE_700} label="Tax collected" />
-      <Swatch color={SLATE_400} label="Net take-home" />
-      <span className="text-slate-400">·</span>
-      <span className="text-amber-700">Amber: pinned city</span>
+    <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-stone-600">
+      <Swatch color={STONE_700} label="Tax collected" />
+      <Swatch color={STONE_400} label="Net take-home" />
+      <span className="text-stone-400">·</span>
+      <span className="text-emerald-700">Emerald: pinned city</span>
     </div>
   );
 }
@@ -156,8 +156,8 @@ function CustomTooltip({ active, payload }: TooltipProps) {
   if (!active || !payload?.length) return null;
   const d = payload[0].payload;
   return (
-    <div className="rounded-md border border-slate-200 bg-white p-3 text-xs shadow-md">
-      <p className="mb-1 font-semibold text-slate-900">
+    <div className="rounded-md border border-stone-200 bg-white p-3 text-xs shadow-md">
+      <p className="mb-1 font-semibold text-stone-900">
         {d.name} · {d.country}
       </p>
       <Row label="Employer cost" value={formatEUR(d.employerCost)} bold />
@@ -172,7 +172,7 @@ function Row({ label, value, bold }: { label: string; value: string; bold?: bool
   return (
     <div
       className={`flex justify-between gap-6 ${
-        bold ? "font-semibold text-slate-900" : "text-slate-600"
+        bold ? "font-semibold text-stone-900" : "text-stone-600"
       }`}
     >
       <span>{label}</span>

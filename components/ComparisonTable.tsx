@@ -75,9 +75,9 @@ export function ComparisonTable() {
       <div className="space-y-4">
         <Controls />
 
-        <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+        <div className="overflow-x-auto rounded-xl border border-stone-200 bg-white shadow-sm">
           <table className="w-full min-w-[820px] text-left text-sm">
-            <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <thead className="bg-stone-50 text-xs font-semibold uppercase tracking-wider text-stone-500">
               <tr>
                 {COLUMNS.map((col, i) => {
                   const isActive = sortKey === col.key;
@@ -93,15 +93,15 @@ export function ComparisonTable() {
                       scope="col"
                       className={`select-none px-4 py-3 ${
                         col.align === "right" ? "text-right" : "text-left"
-                      } ${i === 0 ? "sticky left-0 z-10 bg-slate-50" : ""}`}
+                      } ${i === 0 ? "sticky left-0 z-10 bg-stone-50" : ""}`}
                     >
                       <button
                         type="button"
                         onClick={() => onHeaderClick(col)}
                         className={`group inline-flex items-center gap-1.5 ${
                           col.align === "right" ? "ml-auto" : ""
-                        } cursor-pointer rounded transition hover:text-slate-900 ${
-                          isActive ? "text-slate-900" : ""
+                        } cursor-pointer rounded transition hover:text-stone-900 ${
+                          isActive ? "text-stone-900" : ""
                         }`}
                       >
                         <span>{col.label}</span>
@@ -112,7 +112,7 @@ export function ComparisonTable() {
                 })}
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-stone-100">
               {sorted.map((city) => {
                 const cell = city.salaries[salary][profile];
                 const realNet = realNetPpp(cell, city.col);
@@ -121,14 +121,14 @@ export function ComparisonTable() {
                 const isHovered = hoveredSlug === city.name;
                 const isAggregate = city.isAggregate ?? false;
                 const rowBase = isPinned
-                  ? "bg-amber-50 ring-2 ring-inset ring-amber-400"
+                  ? "bg-emerald-50 ring-2 ring-inset ring-emerald-400"
                   : isHovered
-                    ? "bg-slate-100"
-                    : "hover:bg-slate-50";
+                    ? "bg-stone-100"
+                    : "hover:bg-stone-50";
                 const stickyBg = isPinned
-                  ? "bg-amber-50"
+                  ? "bg-emerald-50"
                   : isHovered
-                    ? "bg-slate-100"
+                    ? "bg-stone-100"
                     : "bg-white";
                 return (
                   <tr
@@ -147,29 +147,29 @@ export function ComparisonTable() {
                       }
                     }}
                     className={`cursor-pointer outline-none transition-colors ${rowBase} ${
-                      isAggregate ? "italic text-slate-500" : "text-slate-700"
+                      isAggregate ? "italic text-stone-500" : "text-stone-700"
                     }`}
                   >
                     <td
                       className={`sticky left-0 z-10 whitespace-nowrap px-4 py-3 font-medium ${stickyBg} ${
                         isPinned
-                          ? "border-l-4 border-amber-500 pl-3 text-slate-900"
+                          ? "border-l-4 border-emerald-500 pl-3 text-stone-900"
                           : isHovered
-                            ? "text-slate-900"
+                            ? "text-stone-900"
                             : isAggregate
                               ? ""
-                              : "text-slate-900"
+                              : "text-stone-900"
                       }`}
                     >
                       <div className="flex items-center gap-2">
                         {city.name}
                         {isPinned && (
-                          <span className="rounded-full bg-amber-500 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">
+                          <span className="rounded-full bg-emerald-500 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">
                             ★ pinned
                           </span>
                         )}
                         {isAggregate && (
-                          <span className="rounded-full border border-slate-300 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+                          <span className="rounded-full border border-stone-300 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-stone-500">
                             agg
                           </span>
                         )}
@@ -182,7 +182,7 @@ export function ComparisonTable() {
                     <td className="px-4 py-3 text-right tabular-nums">
                       {formatEUR(cell.taxCollected)}
                     </td>
-                    <td className="px-4 py-3 text-right font-semibold tabular-nums text-slate-900">
+                    <td className="px-4 py-3 text-right font-semibold tabular-nums text-stone-900">
                       {formatEUR(cell.net)}
                     </td>
                     <td className="px-4 py-3 text-right tabular-nums">
@@ -210,14 +210,14 @@ function SortIndicator({ active, dir }: { active: boolean; dir: SortDir }) {
     return (
       <span
         aria-hidden
-        className="text-slate-300 transition group-hover:text-slate-500"
+        className="text-stone-300 transition group-hover:text-stone-500"
       >
         ↕
       </span>
     );
   }
   return (
-    <span aria-hidden className="text-slate-700">
+    <span aria-hidden className="text-stone-700">
       {dir === "desc" ? "↓" : "↑"}
     </span>
   );

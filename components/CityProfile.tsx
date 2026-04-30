@@ -87,29 +87,29 @@ export function CityProfile() {
     >
       <Controls className="mb-6" />
       <div className="grid gap-6 lg:grid-cols-5">
-        <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm lg:col-span-3">
-          <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
+        <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm lg:col-span-3">
+          <p className="text-sm font-semibold uppercase tracking-wider text-emerald-700">
             At a glance
           </p>
-          <p className="mt-3 font-serif text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
-            For every <span className="text-amber-600">€1</span> a {profile} employee
+          <p className="mt-3 font-serif text-3xl font-semibold leading-tight text-stone-900 sm:text-4xl">
+            For every <span className="text-emerald-600">€1</span> a {profile} employee
             banks in {city.name} at {formatEUR(salary)} gross, the employer spends{" "}
-            <span className="text-amber-600">€{formatNumber(ratio)}</span>.
+            <span className="text-emerald-600">€{formatNumber(ratio)}</span>.
           </p>
-          <p className="mt-4 text-base leading-relaxed text-slate-600">
+          <p className="mt-4 text-base leading-relaxed text-stone-600">
             {formatEUR(cell.employerCost)} of employer outlay against{" "}
             {formatEUR(cell.net)} of net take-home — a wedge of{" "}
             {formatPercent(cell.wedge)}.
           </p>
         </div>
-        <div className="rounded-xl border-l-4 border-amber-500 bg-amber-50/60 p-6 lg:col-span-2">
-          <p className="text-sm font-semibold uppercase tracking-wider text-slate-500">
+        <div className="rounded-xl border-l-4 border-emerald-500 bg-emerald-50/60 p-6 lg:col-span-2">
+          <p className="text-sm font-semibold uppercase tracking-wider text-stone-500">
             {city.country} tax structure
           </p>
-          <ul className="mt-4 space-y-2 text-sm leading-relaxed text-slate-700">
+          <ul className="mt-4 space-y-2 text-sm leading-relaxed text-stone-700">
             {city.taxStructure.notes.map((n) => (
               <li key={n} className="flex gap-2">
-                <span className="text-amber-600">•</span>
+                <span className="text-emerald-600">•</span>
                 <span>{n}</span>
               </li>
             ))}

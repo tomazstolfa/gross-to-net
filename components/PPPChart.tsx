@@ -17,8 +17,8 @@ import { Controls } from "./ui/Controls";
 import { realCities, realNetPpp, PPP_BASELINE } from "@/lib/data";
 import { formatEUR, formatEURCompact } from "@/lib/format";
 
-const SLATE_500 = "#64748b";
-const AMBER_500 = "#f59e0b";
+const STONE_500 = "#78716c";
+const EMERALD_500 = "#10b981";
 
 export function PPPChart() {
   const { salary, profile, effectiveSlug, setHoveredSlug } = useHighlight();
@@ -46,18 +46,18 @@ export function PPPChart() {
       lede={`Net divided by Numbeo's ex-rent index, baseline ${PPP_BASELINE} ≈ EU average. A high-tax city in a cheap country can outrank a low-tax city in an expensive one.`}
     >
       <Controls className="mb-6" />
-      <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+      <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm sm:p-6">
         <ResponsiveContainer width="100%" height={420}>
           <BarChart
             data={chartData}
             margin={{ top: 12, right: 12, bottom: 56, left: 12 }}
           >
-            <CartesianGrid stroke="#e2e8f0" vertical={false} />
+            <CartesianGrid stroke="#e7e5e4" vertical={false} />
             <XAxis
               dataKey="name"
-              tick={{ fontSize: 12, fill: "#64748b" }}
+              tick={{ fontSize: 12, fill: "#78716c" }}
               tickLine={false}
-              axisLine={{ stroke: "#cbd5e1" }}
+              axisLine={{ stroke: "#d6d3d1" }}
               angle={-30}
               textAnchor="end"
               interval={0}
@@ -65,12 +65,12 @@ export function PPPChart() {
             />
             <YAxis
               tickFormatter={(v) => formatEURCompact(v)}
-              tick={{ fontSize: 12, fill: "#64748b" }}
+              tick={{ fontSize: 12, fill: "#78716c" }}
               tickLine={false}
-              axisLine={{ stroke: "#cbd5e1" }}
+              axisLine={{ stroke: "#d6d3d1" }}
               width={72}
             />
-            <Tooltip content={<PPPTooltip />} cursor={{ fill: "#f1f5f9" }} />
+            <Tooltip content={<PPPTooltip />} cursor={{ fill: "#f5f5f4" }} />
             <Bar
               dataKey="realNet"
               name="Real net (PPP)"
@@ -82,7 +82,7 @@ export function PPPChart() {
               {chartData.map((d) => (
                 <Cell
                   key={`real-${d.name}`}
-                  fill={d.name === effectiveSlug ? AMBER_500 : SLATE_500}
+                  fill={d.name === effectiveSlug ? EMERALD_500 : STONE_500}
                 />
               ))}
             </Bar>
@@ -110,19 +110,19 @@ function PPPTooltip({ active, payload }: PPPTooltipProps) {
   if (!active || !payload?.length) return null;
   const d = payload[0].payload;
   return (
-    <div className="rounded-md border border-slate-200 bg-white p-3 text-xs shadow-md">
-      <p className="mb-1 font-semibold text-slate-900">
+    <div className="rounded-md border border-stone-200 bg-white p-3 text-xs shadow-md">
+      <p className="mb-1 font-semibold text-stone-900">
         {d.name} · {d.country}
       </p>
-      <div className="flex justify-between gap-6 font-semibold text-slate-900">
+      <div className="flex justify-between gap-6 font-semibold text-stone-900">
         <span>Real net</span>
         <span className="tabular-nums">{formatEUR(d.realNet)}</span>
       </div>
-      <div className="flex justify-between gap-6 text-slate-600">
+      <div className="flex justify-between gap-6 text-stone-600">
         <span>Nominal net</span>
         <span className="tabular-nums">{formatEUR(d.nominalNet)}</span>
       </div>
-      <div className="flex justify-between gap-6 text-slate-600">
+      <div className="flex justify-between gap-6 text-stone-600">
         <span>Numbeo idx</span>
         <span className="tabular-nums">{d.idx}</span>
       </div>
