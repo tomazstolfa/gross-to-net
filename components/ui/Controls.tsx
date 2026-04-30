@@ -10,7 +10,13 @@ import {
 } from "@/lib/data";
 import { formatEURCompact } from "@/lib/format";
 
-export function Controls({ className = "" }: { className?: string }) {
+type ControlsProps = {
+  className?: string;
+  /** Hide the gross-salary segmented control. Useful when the chart has salary on an axis. */
+  showSalary?: boolean;
+};
+
+export function Controls({ className = "", showSalary = true }: ControlsProps) {
   const {
     salary,
     setSalary,
@@ -24,7 +30,7 @@ export function Controls({ className = "" }: { className?: string }) {
     <div
       className={`flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5 lg:flex-row lg:flex-wrap lg:items-end lg:gap-6 ${className}`}
     >
-      <SegmentedSalary value={salary} onChange={setSalary} />
+      {showSalary && <SegmentedSalary value={salary} onChange={setSalary} />}
       <SegmentedProfile value={profile} onChange={setProfile} />
       <CitySelect value={selectedSlug} onChange={setSelectedSlug} />
     </div>

@@ -2,10 +2,9 @@
 
 import { useMemo } from "react";
 import {
+  Area,
+  AreaChart,
   CartesianGrid,
-  Line,
-  LineChart,
-  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -14,42 +13,55 @@ import {
 import { Section } from "./ui/Section";
 import { useHighlight } from "./ui/HighlightContext";
 import { Controls } from "./ui/Controls";
-import { realCities, SALARY_POINTS } from "@/lib/data";
-import { formatEURCompact, formatPercent } from "@/lib/format";
+import { findCity, SALARY_POINTS, type CityData } from "@/lib/data";
+import { formatEUR, formatEURCompact, formatPercent } from "@/lib/format";
 
-const SLATE_300 = "#cbd5e1";
-const SLATE_500 = "#64748b";
-const AMBER_500 = "#f59e0b";
+const SLATE_700 = "#334155";
+const AMBER_400 = "#fbbf24";
 
 export function ProgressiveCurve() {
-  const { salary, profile, effectiveSlug, setHoveredSlug } = useHighlight();
+  const { profile, effectiveSlug } = useHighlight();
+  const city: CityData = findCity(effectiveSlug) ?? findCity("Ljubljana")!;
 
-  const chartData = useMemo(() => {
-    return SALARY_POINTS.map((point) => {
-      const row: Record<string, number> = { salary: point };
-      for (const c of realCities()) {
-        row[c.name] = c.salaries[point][profile].wedge;
-      }
-      return row;
-    });
-  }, [profile]);
-
-  const cityNames = useMemo(() => realCities().map((c) => c.name), []);
+  const chartData = useMemo(
+    () =>
+      SALARY_POINTS.map((point) => {
+        const cell = city.salaries[point][profile];
+        return {
+          salary: point,
+          net: cell.net,
+          tax: cell.taxCollected,
+          employerCost: cell.employerCost,
+          wedge: cell.wedge,
+        };
+      }),
+    [city, profile],
+  );
 
   return (
     <Section
       id="progressive"
       eyebrow="Progressivity"
-      title="How the wedge moves as gross rises."
-      lede="One line per country, across the five salary points. Flat regimes plateau; progressive ones ramp."
+      title="How the breakdown shifts as gross rises."
+      lede={`Net take-home and tax collected, stacked to total employer cost across the five salary points. Showing ${city.name}, ${city.country}.`}
     >
-      <Controls className="mb-6" />
+      <Controls className="mb-6" showSalary={false} />
       <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
         <ResponsiveContainer width="100%" height={460}>
-          <LineChart
+          <AreaChart
             data={chartData}
             margin={{ top: 16, right: 24, bottom: 24, left: 12 }}
           >
+            <defs>
+              <linearGradient id="netFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={AMBER_400} stopOpacity={0.95} />
+                <stop offset="100%" stopColor={AMBER_400} stopOpacity={0.7} />
+              </linearGradient>
+              <linearGradient id="taxFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={SLATE_700} stopOpacity={0.9} />
+                <stop offset="100%" stopColor={SLATE_700} stopOpacity={0.75} />
+              </linearGradient>
+            </defs>
             <CartesianGrid stroke="#e2e8f0" vertical={false} />
             <XAxis
               dataKey="salary"
@@ -62,93 +74,115 @@ export function ProgressiveCurve() {
               axisLine={{ stroke: "#cbd5e1" }}
             />
             <YAxis
-              tickFormatter={(v) => formatPercent(v)}
-              domain={[0.2, 0.7]}
+              tickFormatter={(v) => formatEURCompact(v)}
               tick={{ fontSize: 12, fill: "#64748b" }}
               tickLine={false}
               axisLine={{ stroke: "#cbd5e1" }}
-              width={48}
-            />
-            <ReferenceLine
-              x={salary}
-              stroke={SLATE_500}
-              strokeDasharray="4 4"
-              ifOverflow="extendDomain"
-              label={{
-                value: formatEURCompact(salary),
-                position: "top",
-                fontSize: 11,
-                fill: SLATE_500,
-              }}
+              width={64}
             />
             <Tooltip
-              content={<CurveTooltip activeSlug={effectiveSlug} />}
+              content={<AreaTooltip />}
               cursor={{ stroke: "#cbd5e1", strokeDasharray: "3 3" }}
             />
-            {cityNames.map((name) => {
-              const isActive = name === effectiveSlug;
-              return (
-                <Line
-                  key={name}
-                  type="monotone"
-                  dataKey={name}
-                  stroke={isActive ? AMBER_500 : SLATE_300}
-                  strokeWidth={isActive ? 3 : 1.2}
-                  strokeOpacity={isActive ? 1 : 0.6}
-                  dot={isActive ? { r: 4, fill: AMBER_500 } : false}
-                  activeDot={{ r: 5 }}
-                  isAnimationActive={false}
-                  onMouseEnter={() => setHoveredSlug(name)}
-                  onMouseLeave={() => setHoveredSlug(null)}
-                />
-              );
-            })}
-          </LineChart>
+            <Area
+              type="monotone"
+              dataKey="net"
+              stackId="1"
+              stroke="#f59e0b"
+              strokeWidth={1.5}
+              fill="url(#netFill)"
+              name="Net take-home"
+              isAnimationActive={false}
+            />
+            <Area
+              type="monotone"
+              dataKey="tax"
+              stackId="1"
+              stroke="#1e293b"
+              strokeWidth={1.5}
+              fill="url(#taxFill)"
+              name="Tax collected"
+              isAnimationActive={false}
+            />
+          </AreaChart>
         </ResponsiveContainer>
+        <Legend />
       </div>
     </Section>
   );
 }
 
-type CurveTooltipProps = {
+function Legend() {
+  return (
+    <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-600">
+      <Swatch color={SLATE_700} label="Tax collected" />
+      <Swatch color={AMBER_400} label="Net take-home" />
+      <span className="text-slate-400">·</span>
+      <span>Total height = employer cost.</span>
+    </div>
+  );
+}
+
+function Swatch({ color, label }: { color: string; label: string }) {
+  return (
+    <span className="inline-flex items-center gap-2">
+      <span
+        aria-hidden
+        className="inline-block h-3 w-3 rounded-sm"
+        style={{ backgroundColor: color }}
+      />
+      {label}
+    </span>
+  );
+}
+
+type TooltipProps = {
   active?: boolean;
   label?: number;
-  payload?: Array<{ name: string; value: number; color: string }>;
-  activeSlug: string;
+  payload?: Array<{
+    payload: {
+      salary: number;
+      net: number;
+      tax: number;
+      employerCost: number;
+      wedge: number;
+    };
+  }>;
 };
 
-function CurveTooltip({ active, label, payload, activeSlug }: CurveTooltipProps) {
+function AreaTooltip({ active, label, payload }: TooltipProps) {
   if (!active || !payload?.length) return null;
-  const activeRow = payload.find((p) => p.name === activeSlug);
-  const others = [...payload]
-    .filter((p) => p.name !== activeSlug)
-    .sort((a, b) => b.value - a.value)
-    .slice(0, 5);
+  const d = payload[0].payload;
   return (
     <div className="rounded-md border border-slate-200 bg-white p-3 text-xs shadow-md">
-      <p className="mb-2 font-semibold text-slate-900">
+      <p className="mb-1 font-semibold text-slate-900">
         Gross {label ? formatEURCompact(label) : ""}
       </p>
-      <div className="space-y-1">
-        {activeRow && (
-          <div
-            className="flex items-center justify-between gap-6 font-semibold"
-            style={{ color: activeRow.color }}
-          >
-            <span>{activeRow.name}</span>
-            <span className="tabular-nums">{formatPercent(activeRow.value)}</span>
-          </div>
-        )}
-        {others.map((p) => (
-          <div
-            key={p.name}
-            className="flex items-center justify-between gap-6 text-slate-500"
-          >
-            <span>{p.name}</span>
-            <span className="tabular-nums">{formatPercent(p.value)}</span>
-          </div>
-        ))}
-      </div>
+      <Row label="Employer cost" value={formatEUR(d.employerCost)} bold />
+      <Row label="Tax collected" value={formatEUR(d.tax)} />
+      <Row label="Net take-home" value={formatEUR(d.net)} />
+      <Row label="Wedge" value={formatPercent(d.wedge)} />
+    </div>
+  );
+}
+
+function Row({
+  label,
+  value,
+  bold,
+}: {
+  label: string;
+  value: string;
+  bold?: boolean;
+}) {
+  return (
+    <div
+      className={`flex justify-between gap-6 ${
+        bold ? "font-semibold text-slate-900" : "text-slate-600"
+      }`}
+    >
+      <span>{label}</span>
+      <span className="tabular-nums">{value}</span>
     </div>
   );
 }
