@@ -13,6 +13,7 @@ import {
 } from "recharts";
 import { Section } from "./ui/Section";
 import { useHighlight } from "./ui/HighlightContext";
+import { Controls } from "./ui/Controls";
 import { realCities, realNetPpp, PPP_BASELINE } from "@/lib/data";
 import { formatEUR, formatEURCompact } from "@/lib/format";
 
@@ -20,7 +21,7 @@ const SLATE_500 = "#64748b";
 const AMBER_500 = "#f59e0b";
 
 export function PPPChart() {
-  const { salary, profile, hoveredSlug, setHoveredSlug } = useHighlight();
+  const { salary, profile, effectiveSlug, setHoveredSlug } = useHighlight();
 
   const chartData = useMemo(() => {
     const arr = realCities().map((c) => {
@@ -44,6 +45,7 @@ export function PPPChart() {
       title="Net adjusted to local cost of living."
       lede={`Net take-home re-indexed to a Numbeo ex-rent baseline of ${PPP_BASELINE} (≈ EU average). A high-tax city in a cheap country can outrank a low-tax city in an expensive one.`}
     >
+      <Controls className="mb-6" />
       <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
         <ResponsiveContainer width="100%" height={420}>
           <BarChart
@@ -80,7 +82,7 @@ export function PPPChart() {
               {chartData.map((d) => (
                 <Cell
                   key={`real-${d.name}`}
-                  fill={d.name === hoveredSlug ? AMBER_500 : SLATE_500}
+                  fill={d.name === effectiveSlug ? AMBER_500 : SLATE_500}
                 />
               ))}
             </Bar>

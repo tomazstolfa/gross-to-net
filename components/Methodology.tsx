@@ -1,24 +1,77 @@
 import { Section } from "./ui/Section";
 import { DATA_VINTAGE, FX, PPP_BASELINE } from "@/lib/data";
 
-const SOURCES = [
-  "PwC Worldwide Tax Summaries 2025/2026",
-  "KPMG Individual Income Tax tables 2025/2026",
-  "Slovenia FURS — official 2026 brackets",
-  "Estonia EMTA — flat tax, MTÜ social tax",
-  "Ireland Revenue.ie — PAYE/USC/PRSI 2026",
-  "UK HMRC — income tax + NIC schedule (post-April 2025)",
-  "Netherlands Belastingdienst — Box 1 + Zvw",
-  "Germany Bundeszentralamt für Steuern — federal brackets + Soli",
-  "Spain Agencia Tributaria + Catalonia regional table",
-  "Italy — Comune di Milano addizionale + Regione Lombardia + INPS",
-  "Portugal Autoridade Tributária — IRS + TSU",
-  "Poland KIS — PIT + ZUS",
-  "Croatia Porezna Uprava — 2024 reform tables",
-  "Workplace.hr Slovenia 2026 calculator",
-  "Numbeo April 2026 cost-of-living indices",
-  "Eurofast Croatia Tax Card 2025",
-  "EY Estonia 2025-2026 tax alert",
+type Source = { name: string; url: string };
+
+const SOURCES: Source[] = [
+  {
+    name: "PwC Worldwide Tax Summaries 2025/2026",
+    url: "https://taxsummaries.pwc.com/",
+  },
+  {
+    name: "KPMG Individual Income Tax tables 2025/2026",
+    url: "https://kpmg.com/xx/en/our-insights/tax/individual-income-tax-rates-table.html",
+  },
+  {
+    name: "Slovenia FURS — official 2026 brackets",
+    url: "https://www.fu.gov.si/davki_in_druge_dajatve/podrocja/dohodnina/",
+  },
+  {
+    name: "Estonia EMTA — flat tax, MTÜ social tax",
+    url: "https://www.emta.ee/en",
+  },
+  {
+    name: "Ireland Revenue.ie — PAYE/USC/PRSI 2026",
+    url: "https://www.revenue.ie/en/jobs-and-pensions/calculating-your-income-tax/index.aspx",
+  },
+  {
+    name: "UK HMRC — income tax + NIC schedule (post-April 2025)",
+    url: "https://www.gov.uk/income-tax-rates",
+  },
+  {
+    name: "Netherlands Belastingdienst — Box 1 + Zvw",
+    url: "https://www.belastingdienst.nl/",
+  },
+  {
+    name: "Germany Bundeszentralamt für Steuern — federal brackets + Soli",
+    url: "https://www.bundesfinanzministerium.de/Web/EN/Issues/Taxation/taxation.html",
+  },
+  {
+    name: "Spain Agencia Tributaria + Catalonia regional table",
+    url: "https://sede.agenciatributaria.gob.es/",
+  },
+  {
+    name: "Italy — Comune di Milano addizionale + Regione Lombardia + INPS",
+    url: "https://www.agenziaentrate.gov.it/portale/web/english",
+  },
+  {
+    name: "Portugal Autoridade Tributária — IRS + TSU",
+    url: "https://www.portaldasfinancas.gov.pt/",
+  },
+  {
+    name: "Poland KIS — PIT + ZUS",
+    url: "https://www.podatki.gov.pl/",
+  },
+  {
+    name: "Croatia Porezna Uprava — 2024 reform tables",
+    url: "https://www.porezna-uprava.hr/",
+  },
+  {
+    name: "Workplace.hr Slovenia 2026 calculator",
+    url: "https://www.workplace.hr/",
+  },
+  {
+    name: "Numbeo April 2026 cost-of-living indices",
+    url: "https://www.numbeo.com/cost-of-living/",
+  },
+  {
+    name: "Eurofast Croatia Tax Card 2025",
+    url: "https://eurofast.eu/",
+  },
+  {
+    name: "EY Estonia 2025-2026 tax alert",
+    url: "https://www.ey.com/en_ee/tax",
+  },
 ];
 
 export function Methodology() {
@@ -33,9 +86,19 @@ export function Methodology() {
         <Detail summary="Sources">
           <ul className="grid gap-1.5 sm:grid-cols-2">
             {SOURCES.map((s) => (
-              <li key={s} className="flex gap-2 text-sm text-slate-600">
+              <li key={s.name} className="flex gap-2 text-sm">
                 <span className="text-slate-400">·</span>
-                <span>{s}</span>
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="text-slate-700 underline-offset-2 transition hover:text-amber-700 hover:underline"
+                >
+                  {s.name}
+                  <span aria-hidden className="ml-1 text-slate-400">
+                    ↗
+                  </span>
+                </a>
               </li>
             ))}
           </ul>

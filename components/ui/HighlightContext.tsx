@@ -10,9 +10,15 @@ import {
 } from "react";
 import type { Profile, SalaryPoint } from "@/lib/data";
 
+const DEFAULT_SELECTED = "Ljubljana";
+
 type HighlightContextValue = {
   hoveredSlug: string | null;
   setHoveredSlug: (slug: string | null) => void;
+  selectedSlug: string;
+  setSelectedSlug: (slug: string) => void;
+  /** Hovered overrides selected; this is what the UI should display/highlight. */
+  effectiveSlug: string;
   salary: SalaryPoint;
   setSalary: (s: SalaryPoint) => void;
   profile: Profile;
@@ -23,6 +29,7 @@ const HighlightCtx = createContext<HighlightContextValue | null>(null);
 
 export function HighlightProvider({ children }: { children: ReactNode }) {
   const [hoveredSlug, setHoveredSlugState] = useState<string | null>(null);
+  const [selectedSlug, setSelectedSlug] = useState<string>(DEFAULT_SELECTED);
   const [salary, setSalary] = useState<SalaryPoint>(100000);
   const [profile, setProfile] = useState<Profile>("single");
 
@@ -30,16 +37,19 @@ export function HighlightProvider({ children }: { children: ReactNode }) {
     setHoveredSlugState(slug);
   }, []);
 
-  const value = useMemo(
+  const value = useMemo<HighlightContextValue>(
     () => ({
       hoveredSlug,
       setHoveredSlug,
+      selectedSlug,
+      setSelectedSlug,
+      effectiveSlug: hoveredSlug ?? selectedSlug,
       salary,
       setSalary,
       profile,
       setProfile,
     }),
-    [hoveredSlug, setHoveredSlug, salary, profile],
+    [hoveredSlug, setHoveredSlug, selectedSlug, salary, profile],
   );
 
   return <HighlightCtx.Provider value={value}>{children}</HighlightCtx.Provider>;
