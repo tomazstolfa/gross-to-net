@@ -4,7 +4,13 @@ import { useMemo, useState } from "react";
 import { Section } from "./ui/Section";
 import { Controls } from "./ui/Controls";
 import { useHighlight } from "./ui/HighlightContext";
-import { cities, eurPerEuroNet, realNetPpp, type CityData } from "@/lib/data";
+import {
+  cities,
+  eurPerEuroNet,
+  realNetPpp,
+  type CityData,
+  type SalaryPoint,
+} from "@/lib/data";
 import { formatEUR, formatPercent, formatNumber } from "@/lib/format";
 
 type SortKey =
@@ -227,7 +233,7 @@ function compareCities(
   a: CityData,
   b: CityData,
   key: SortKey,
-  salary: 70000 | 100000 | 150000 | 200000 | 250000,
+  salary: SalaryPoint,
   profile: "single" | "family",
 ): number {
   const ac = a.salaries[salary][profile];

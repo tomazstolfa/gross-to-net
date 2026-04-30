@@ -19,9 +19,11 @@ import { formatEUR, formatEURCompact } from "@/lib/format";
 
 const STONE_500 = "#78716c";
 const EMERALD_500 = "#10b981";
+const SKY_500 = "#0ea5e9";
 
 export function PPPChart() {
-  const { salary, profile, effectiveSlug, setHoveredSlug } = useHighlight();
+  const { salary, profile, selectedSlug, hoveredSlug, setHoveredSlug } =
+    useHighlight();
 
   const chartData = useMemo(() => {
     const arr = realCities().map((c) => {
@@ -43,7 +45,7 @@ export function PPPChart() {
       id="ppp"
       eyebrow="Purchasing power"
       title="Net, adjusted for what things cost."
-      lede={`Net divided by Numbeo's ex-rent index, baseline ${PPP_BASELINE} ≈ EU average. A high-tax city in a cheap country can outrank a low-tax city in an expensive one.`}
+      lede={`Net divided by Numbeo's ex-rent index, baseline ${PPP_BASELINE} ≈ EU average.`}
     >
       <Controls className="mb-6" />
       <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm sm:p-6">
@@ -79,12 +81,12 @@ export function PPPChart() {
               }
               onMouseLeave={() => setHoveredSlug(null)}
             >
-              {chartData.map((d) => (
-                <Cell
-                  key={`real-${d.name}`}
-                  fill={d.name === effectiveSlug ? EMERALD_500 : STONE_500}
-                />
-              ))}
+              {chartData.map((d) => {
+                const isPinned = d.name === selectedSlug;
+                const isHovered = !isPinned && d.name === hoveredSlug;
+                const fill = isPinned ? EMERALD_500 : isHovered ? SKY_500 : STONE_500;
+                return <Cell key={`real-${d.name}`} fill={fill} />;
+              })}
             </Bar>
           </BarChart>
         </ResponsiveContainer>

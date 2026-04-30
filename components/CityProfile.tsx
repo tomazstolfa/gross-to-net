@@ -72,8 +72,8 @@ const FALLBACK = {
 };
 
 export function CityProfile() {
-  const { salary, profile, effectiveSlug } = useHighlight();
-  const city: CityData = findCity(effectiveSlug) ?? findCity("Ljubljana")!;
+  const { salary, profile, selectedSlug } = useHighlight();
+  const city: CityData = findCity(selectedSlug) ?? findCity("Ljubljana")!;
   const cell = city.salaries[salary][profile];
   const ratio = eurPerEuroNet(cell);
   const copy = COPY[city.name] ?? FALLBACK;
