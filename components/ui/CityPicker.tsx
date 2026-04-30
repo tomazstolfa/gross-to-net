@@ -19,7 +19,7 @@ export function CityPicker({ variant = "inline" }: Props) {
   return (
     <span className="relative inline-block">
       <select
-        aria-label="Select a city to preview"
+        aria-label="Pinned city"
         value={selectedSlug}
         onChange={(e) => setSelectedSlug(e.target.value)}
         className={variant === "inline" ? inlineClass : blockClass}

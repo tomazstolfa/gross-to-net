@@ -2,20 +2,20 @@
 
 Open-source comparison of **employer cost vs net take-home** across 13 European cities.
 
-How much of your salary survives the trip from your employer's payroll to your bank account? This site shows the answer for 12 cities (Ljubljana, Milan, Lisbon, Berlin, Amsterdam, Barcelona, Zagreb, Dublin, Copenhagen, Tallinn, Warsaw, London) plus an EU aggregate, at five salary points (€70k–€250k) and two family profiles (single, married single-earner with two children). All values are normalized to EUR; a separate view re-indexes net to local cost of living using a Numbeo-based PPP factor.
+Twelve cities — Ljubljana, Milan, Lisbon, Berlin, Amsterdam, Barcelona, Zagreb, Dublin, Copenhagen, Tallinn, Warsaw, London — plus an EU aggregate. Five salary points (€70k–€250k). Two household profiles (single; married, single-earner, two children). All values in EUR, with a separate view normalised for local cost of living via a Numbeo-based PPP factor.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Sections
 
-1. **Hero** — the question.
-2. **Four numbers** — employer cost, tax collected, net, € per €1 net. Hover any city in the comparison to swap the values.
-3. **Master comparison table** — sortable, with salary-point and profile controls.
-4. **Stacked bar chart** — `tax + net = employer cost`, one bar per city.
-5. **Slovenia panel** — narrative on why Slovenia's wedge runs hot.
-6. **PPP chart** — net adjusted to local cost of living.
+1. **Hero** — what the project shows.
+2. **Selected city** — employer cost, tax collected, net, € per €1 net.
+3. **Comparison table** — sortable; click a row to pin a city through every chart below.
+4. **Stacked bar** — `tax + net = employer cost`, one bar per city.
+5. **City profile** — per-city tax structure for whichever city is pinned.
+6. **PPP chart** — net adjusted for local cost of living.
 7. **Progressive curve** — effective wedge as gross income climbs.
-8. **Methodology** — sources, assumptions, caveats, FX snapshot.
+8. **Methodology** — sources, profiles, FX, PPP method, caveats.
 9. **Footer**.
 
 ## Local development

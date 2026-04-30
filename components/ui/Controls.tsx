@@ -126,7 +126,7 @@ function CitySelect({
         htmlFor="city-select"
         className="text-[11px] font-semibold uppercase tracking-widest text-slate-500"
       >
-        Highlighted city
+        Pinned city
       </label>
       <div className="relative">
         <select

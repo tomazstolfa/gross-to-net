@@ -41,7 +41,7 @@ export function ProgressiveCurve() {
       id="progressive"
       eyebrow="Progressivity"
       title="How the wedge moves as gross rises."
-      lede="Each line is one country, plotted across five gross-salary points. Flat regimes plateau; progressive regimes ramp. The pinned city stands out; the dashed line marks the salary you've selected above."
+      lede="One line per country, across the five salary points. Flat regimes plateau; progressive ones ramp."
     >
       <Controls className="mb-6" />
       <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">

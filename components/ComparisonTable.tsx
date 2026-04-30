@@ -68,18 +68,12 @@ export function ComparisonTable() {
   return (
     <Section
       id="table"
-      eyebrow="Master comparison"
+      eyebrow="Comparison"
       title="Every city, every metric."
-      lede="Click a column header to sort. Click a row to pin a city — every chart on this page will follow it. Hover for a transient preview."
+      lede="Click a column to sort, a row to pin. Pinned cities flow through every chart below."
     >
       <div className="space-y-4">
         <Controls />
-
-        <div className="flex items-center justify-end">
-          <p className="text-xs text-slate-500">
-            13 entries · 12 cities + EU aggregate · all values in EUR
-          </p>
-        </div>
 
         <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
           <table className="w-full min-w-[820px] text-left text-sm">
