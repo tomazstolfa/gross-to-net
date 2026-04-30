@@ -117,7 +117,7 @@ function PPPTooltip({ active, payload }: PPPTooltipProps) {
         {d.name} · {d.country}
       </p>
       <div className="flex justify-between gap-6 font-semibold text-stone-900">
-        <span>Real net</span>
+        <span>What it buys you</span>
         <span className="tabular-nums">{formatEUR(d.realNet)}</span>
       </div>
       <div className="flex justify-between gap-6 text-stone-600">
