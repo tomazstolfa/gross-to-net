@@ -18,22 +18,22 @@ export function FourNumbers() {
     {
       label: "Employer cost",
       value: formatEUR(cell.employerCost),
-      blurb: "Gross salary plus the employer's share of social security.",
+      blurb: "What you cost your employer — gross salary plus their share of social security.",
     },
     {
       label: "Tax collected",
       value: formatEUR(cell.taxCollected),
-      blurb: "Income tax, both sides of social security, surcharges.",
+      blurb: "Everything routed to the state. Both sides of social security, plus income tax.",
     },
     {
       label: "Net take-home",
       value: formatEUR(cell.net),
-      blurb: "What lands in the bank after every deduction.",
+      blurb: "What lands in your bank account after every deduction.",
     },
     {
       label: "€ per €1 of net",
       value: formatNumber(eurPerEuroNet(cell)),
-      blurb: `Cost per €1 of net. Effective wedge ${formatPercent(cell.wedge)}.`,
+      blurb: `Your employer spends this for every €1 you bank. Effective wedge ${formatPercent(cell.wedge)}.`,
     },
   ];
 
@@ -41,7 +41,7 @@ export function FourNumbers() {
     <Section
       id="four-numbers"
       eyebrow="Selected city"
-      title="What the employer pays, what the state takes, what's left."
+      title="Your net, your tax, and what your employer pays."
       lede={
         <>
           <CityPicker variant="inline" />

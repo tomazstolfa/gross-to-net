@@ -44,8 +44,8 @@ export function ProgressiveCurve() {
     <Section
       id="progressive"
       eyebrow="Progressivity"
-      title="How the share of total cost shifts as gross rises."
-      lede={`Each bar of total employer cost split into net take-home and tax collected. The higher the gross, the smaller the slice the employee actually keeps. Showing ${city.name}, ${city.country}.`}
+      title="The higher you climb, the smaller your slice."
+      lede={`Each column is 100% of what your employer pays for you. Bottom: what you take home. Top: what goes to the state. Showing ${city.name}, ${city.country}.`}
     >
       <Controls className="mb-6" showSalary={false} />
       <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm sm:p-6">
@@ -124,7 +124,7 @@ function Legend() {
       <Swatch color={STONE_700} label="Tax collected" />
       <Swatch color={EMERALD_400} label="Net take-home" />
       <span className="text-stone-400">·</span>
-      <span>Each column = 100% of employer cost.</span>
+      <span>Each column = 100% of what your employer pays.</span>
     </div>
   );
 }

@@ -142,11 +142,17 @@ export function Methodology() {
               a toggle.
             </li>
             <li>
-              <strong className="text-stone-900">€50k row is interpolated.</strong>{" "}
-              The €70k–€250k cells are sourced; the €50k row is extrapolated
-              downward using each city&apos;s structural ratios (employer-cost-to-gross
-              held constant; net-to-gross given a small bracket-aware bump). Treat the
-              €50k values as approximate.
+              <strong className="text-stone-900">€50k row methodology.</strong>{" "}
+              The €50k cells for Slovenia, Portugal, Netherlands, Spain, Croatia,
+              Denmark, and Estonia are computed directly from PwC 2025/2026 brackets
+              and SS rules via{" "}
+              <span className="font-mono">scripts/compute-cells.ts</span>; the engine
+              is calibrated against each country&apos;s €70k row and matches it
+              within ±5%. The €50k cells for Italy, Germany, Ireland, Poland, and
+              the United Kingdom are still extrapolated from €70k — the engine
+              diverges from the existing curve at €70k for those five, so a clean
+              swap would create a visible kink. They&apos;ll be moved to engine
+              output once the divergence is reconciled per-country.
             </li>
             <li>
               <strong className="text-stone-900">Denmark: 2026 topskat reform.</strong>{" "}
