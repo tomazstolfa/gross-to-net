@@ -8,25 +8,44 @@ import { cities, eurPerEuroNet, realNetPpp, type CityData } from "@/lib/data";
 import { formatEUR, formatPercent, formatNumber } from "@/lib/format";
 
 type SortKey =
+  | "name"
+  | "country"
   | "net"
   | "employerCost"
   | "taxCollected"
   | "wedge"
   | "eurPerEuroNet"
   | "realNet";
+
 type SortDir = "asc" | "desc";
 
-const SORT_OPTIONS: { value: SortKey; label: string }[] = [
-  { value: "net", label: "Net" },
-  { value: "employerCost", label: "Employer cost" },
-  { value: "taxCollected", label: "Tax collected" },
-  { value: "wedge", label: "Wedge %" },
-  { value: "eurPerEuroNet", label: "€ per €1 net" },
-  { value: "realNet", label: "Real net (PPP)" },
+type ColumnDef = {
+  key: SortKey;
+  label: string;
+  align?: "left" | "right";
+  defaultDir: SortDir;
+};
+
+const COLUMNS: ColumnDef[] = [
+  { key: "name", label: "City", align: "left", defaultDir: "asc" },
+  { key: "country", label: "Country", align: "left", defaultDir: "asc" },
+  { key: "employerCost", label: "Employer cost", align: "right", defaultDir: "desc" },
+  { key: "taxCollected", label: "Tax collected", align: "right", defaultDir: "desc" },
+  { key: "net", label: "Net", align: "right", defaultDir: "desc" },
+  { key: "wedge", label: "Wedge", align: "right", defaultDir: "desc" },
+  { key: "eurPerEuroNet", label: "€ / €1 net", align: "right", defaultDir: "desc" },
+  { key: "realNet", label: "Real net (PPP)", align: "right", defaultDir: "desc" },
 ];
 
 export function ComparisonTable() {
-  const { salary, profile, hoveredSlug, setHoveredSlug } = useHighlight();
+  const {
+    salary,
+    profile,
+    hoveredSlug,
+    selectedSlug,
+    setHoveredSlug,
+    setSelectedSlug,
+  } = useHighlight();
   const [sortKey, setSortKey] = useState<SortKey>("net");
   const [sortDir, setSortDir] = useState<SortDir>("desc");
 
@@ -37,45 +56,26 @@ export function ComparisonTable() {
     return arr;
   }, [sortKey, sortDir, salary, profile]);
 
+  const onHeaderClick = (col: ColumnDef) => {
+    if (col.key === sortKey) {
+      setSortDir((d) => (d === "desc" ? "asc" : "desc"));
+    } else {
+      setSortKey(col.key);
+      setSortDir(col.defaultDir);
+    }
+  };
+
   return (
     <Section
       id="table"
       eyebrow="Master comparison"
       title="The whole table, sortable."
-      lede="Pick a salary point and family profile up top; sort the table by any column. Hover a row to highlight that city in every chart below."
+      lede="Pick a salary point and family profile up top; click any column header to sort by it. Hover a row to preview that city in the four cards above and highlight it in every chart below; click a row to pin it."
     >
       <div className="space-y-4">
         <Controls />
 
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-2">
-            <label
-              htmlFor="sort-key"
-              className="text-xs font-semibold uppercase tracking-wider text-slate-500"
-            >
-              Sort by
-            </label>
-            <select
-              id="sort-key"
-              value={sortKey}
-              onChange={(e) => setSortKey(e.target.value as SortKey)}
-              className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-900 shadow-sm focus:border-slate-400 focus:outline-none"
-            >
-              {SORT_OPTIONS.map((o) => (
-                <option key={o.value} value={o.value}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
-            <button
-              type="button"
-              onClick={() => setSortDir((d) => (d === "desc" ? "asc" : "desc"))}
-              className="rounded-md border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-100"
-              aria-label={`Sort ${sortDir === "desc" ? "ascending" : "descending"}`}
-            >
-              {sortDir === "desc" ? "↓" : "↑"}
-            </button>
-          </div>
+        <div className="flex items-center justify-end">
           <p className="text-xs text-slate-500">
             13 entries · 12 cities + EU aggregate · all values in EUR
           </p>
@@ -85,14 +85,37 @@ export function ComparisonTable() {
           <table className="w-full min-w-[820px] text-left text-sm">
             <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500">
               <tr>
-                <th className="sticky left-0 z-10 bg-slate-50 px-4 py-3">City</th>
-                <th className="px-4 py-3">Country</th>
-                <th className="px-4 py-3 text-right">Employer cost</th>
-                <th className="px-4 py-3 text-right">Tax collected</th>
-                <th className="px-4 py-3 text-right">Net</th>
-                <th className="px-4 py-3 text-right">Wedge</th>
-                <th className="px-4 py-3 text-right">€ / €1 net</th>
-                <th className="px-4 py-3 text-right">Real net (PPP)</th>
+                {COLUMNS.map((col, i) => {
+                  const isActive = sortKey === col.key;
+                  const ariaSort: "ascending" | "descending" | "none" = !isActive
+                    ? "none"
+                    : sortDir === "asc"
+                      ? "ascending"
+                      : "descending";
+                  return (
+                    <th
+                      key={col.key}
+                      aria-sort={ariaSort}
+                      scope="col"
+                      className={`select-none px-4 py-3 ${
+                        col.align === "right" ? "text-right" : "text-left"
+                      } ${i === 0 ? "sticky left-0 z-10 bg-slate-50" : ""}`}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => onHeaderClick(col)}
+                        className={`group inline-flex items-center gap-1.5 ${
+                          col.align === "right" ? "ml-auto" : ""
+                        } cursor-pointer rounded transition hover:text-slate-900 ${
+                          isActive ? "text-slate-900" : ""
+                        }`}
+                      >
+                        <span>{col.label}</span>
+                        <SortIndicator active={isActive} dir={sortDir} />
+                      </button>
+                    </th>
+                  );
+                })}
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -101,7 +124,13 @@ export function ComparisonTable() {
                 const realNet = realNetPpp(cell, city.col);
                 const eurPerNet = eurPerEuroNet(cell);
                 const isHovered = hoveredSlug === city.name;
+                const isSelected = selectedSlug === city.name && !hoveredSlug;
                 const isAggregate = city.isAggregate ?? false;
+                const rowTone = isHovered
+                  ? "bg-amber-50"
+                  : isSelected
+                    ? "bg-amber-50/40"
+                    : "hover:bg-slate-50";
                 return (
                   <tr
                     key={city.name}
@@ -109,22 +138,36 @@ export function ComparisonTable() {
                     onMouseLeave={() => setHoveredSlug(null)}
                     onFocus={() => setHoveredSlug(city.name)}
                     onBlur={() => setHoveredSlug(null)}
+                    onClick={() => setSelectedSlug(city.name)}
                     tabIndex={0}
-                    className={`cursor-default outline-none transition-colors ${
-                      isHovered ? "bg-amber-50" : "hover:bg-slate-50"
-                    } ${isAggregate ? "italic text-slate-500" : "text-slate-700"}`}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setSelectedSlug(city.name);
+                      }
+                    }}
+                    className={`cursor-pointer outline-none transition-colors ${rowTone} ${
+                      isAggregate ? "italic text-slate-500" : "text-slate-700"
+                    }`}
                   >
                     <td
                       className={`sticky left-0 z-10 whitespace-nowrap px-4 py-3 font-medium ${
                         isHovered
                           ? "bg-amber-50 text-amber-900"
-                          : isAggregate
-                            ? "bg-white"
-                            : "bg-white text-slate-900"
+                          : isSelected
+                            ? "bg-amber-50/40 text-slate-900"
+                            : isAggregate
+                              ? "bg-white"
+                              : "bg-white text-slate-900"
                       }`}
                     >
                       <div className="flex items-center gap-2">
                         {city.name}
+                        {isSelected && (
+                          <span className="rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-700">
+                            pinned
+                          </span>
+                        )}
                         {isAggregate && (
                           <span className="rounded-full border border-slate-300 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500">
                             agg
@@ -162,6 +205,24 @@ export function ComparisonTable() {
   );
 }
 
+function SortIndicator({ active, dir }: { active: boolean; dir: SortDir }) {
+  if (!active) {
+    return (
+      <span
+        aria-hidden
+        className="text-slate-300 transition group-hover:text-slate-500"
+      >
+        ↕
+      </span>
+    );
+  }
+  return (
+    <span aria-hidden className="text-slate-700">
+      {dir === "desc" ? "↓" : "↑"}
+    </span>
+  );
+}
+
 function compareCities(
   a: CityData,
   b: CityData,
@@ -172,6 +233,10 @@ function compareCities(
   const ac = a.salaries[salary][profile];
   const bc = b.salaries[salary][profile];
   switch (key) {
+    case "name":
+      return a.name.localeCompare(b.name);
+    case "country":
+      return a.country.localeCompare(b.country);
     case "net":
       return bc.net - ac.net;
     case "employerCost":

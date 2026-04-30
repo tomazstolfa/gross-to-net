@@ -2,16 +2,16 @@
 
 import { Section } from "./ui/Section";
 import { Card } from "./ui/Card";
+import { CityPicker } from "./ui/CityPicker";
 import { useHighlight } from "./ui/HighlightContext";
 import { findCity, eurPerEuroNet } from "@/lib/data";
 import { formatEUR, formatPercent, formatNumber } from "@/lib/format";
 
-const DEFAULT_CITY = "Ljubljana";
+const FALLBACK_CITY = "Ljubljana";
 
 export function FourNumbers() {
-  const { hoveredSlug, salary, profile } = useHighlight();
-  const cityName = hoveredSlug ?? DEFAULT_CITY;
-  const city = findCity(cityName) ?? findCity(DEFAULT_CITY)!;
+  const { effectiveSlug, hoveredSlug, salary, profile } = useHighlight();
+  const city = findCity(effectiveSlug) ?? findCity(FALLBACK_CITY)!;
   const cell = city.salaries[salary][profile];
 
   const cards = [
@@ -44,7 +44,17 @@ export function FourNumbers() {
       id="four-numbers"
       eyebrow="The four numbers that matter"
       title="Most salary debates confuse these. They are not the same."
-      lede={`Live preview for ${city.name}, ${city.country}. Hover any city in the comparison below to swap the values.`}
+      lede={
+        <>
+          Live preview for <CityPicker variant="inline" />. Hover any row in the
+          comparison below to temporarily preview another city; the dropdown stays put.
+          {hoveredSlug && hoveredSlug !== city.name && (
+            <span className="ml-1 text-amber-700">
+              (Showing hovered: {hoveredSlug})
+            </span>
+          )}
+        </>
+      }
     >
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {cards.map((c) => (

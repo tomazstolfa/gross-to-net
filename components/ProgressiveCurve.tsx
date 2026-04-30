@@ -12,15 +12,15 @@ import {
 } from "recharts";
 import { Section } from "./ui/Section";
 import { useHighlight } from "./ui/HighlightContext";
+import { Controls } from "./ui/Controls";
 import { realCities, SALARY_POINTS } from "@/lib/data";
 import { formatEURCompact, formatPercent } from "@/lib/format";
 
 const SLATE_300 = "#cbd5e1";
-const SLATE_500 = "#64748b";
 const AMBER_500 = "#f59e0b";
 
 export function ProgressiveCurve() {
-  const { profile, hoveredSlug, setHoveredSlug } = useHighlight();
+  const { profile, effectiveSlug, setHoveredSlug } = useHighlight();
 
   const chartData = useMemo(() => {
     return SALARY_POINTS.map((point) => {
@@ -39,8 +39,9 @@ export function ProgressiveCurve() {
       id="progressive"
       eyebrow="Progressivity"
       title="Where each country's curve bends."
-      lede="Effective wedge as gross income climbs from €70k to €250k. Flat-tax regimes (Estonia) plateau; progressive regimes (Italy, Slovenia, Ireland) ramp hard. Hover a row in the table above to highlight a single line here."
+      lede="Effective wedge as gross income climbs from €70k to €250k. Flat-tax regimes (Estonia) plateau; progressive regimes (Italy, Slovenia, Ireland) ramp hard. The pinned city's line is highlighted; hover any city to swap."
     >
+      <Controls className="mb-6" />
       <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
         <ResponsiveContainer width="100%" height={460}>
           <LineChart
@@ -67,20 +68,20 @@ export function ProgressiveCurve() {
               width={48}
             />
             <Tooltip
-              content={<CurveTooltip hoveredSlug={hoveredSlug} />}
+              content={<CurveTooltip activeSlug={effectiveSlug} />}
               cursor={{ stroke: "#cbd5e1", strokeDasharray: "3 3" }}
             />
             {cityNames.map((name) => {
-              const isHovered = name === hoveredSlug;
+              const isActive = name === effectiveSlug;
               return (
                 <Line
                   key={name}
                   type="monotone"
                   dataKey={name}
-                  stroke={isHovered ? AMBER_500 : hoveredSlug ? SLATE_300 : SLATE_500}
-                  strokeWidth={isHovered ? 3 : hoveredSlug ? 1 : 1.4}
-                  strokeOpacity={hoveredSlug && !isHovered ? 0.5 : 1}
-                  dot={isHovered ? { r: 4, fill: AMBER_500 } : false}
+                  stroke={isActive ? AMBER_500 : SLATE_300}
+                  strokeWidth={isActive ? 3 : 1.2}
+                  strokeOpacity={isActive ? 1 : 0.6}
+                  dot={isActive ? { r: 4, fill: AMBER_500 } : false}
                   activeDot={{ r: 5 }}
                   isAnimationActive={false}
                   onMouseEnter={() => setHoveredSlug(name)}
@@ -99,36 +100,41 @@ type CurveTooltipProps = {
   active?: boolean;
   label?: number;
   payload?: Array<{ name: string; value: number; color: string }>;
-  hoveredSlug: string | null;
+  activeSlug: string;
 };
 
-function CurveTooltip({ active, label, payload, hoveredSlug }: CurveTooltipProps) {
+function CurveTooltip({ active, label, payload, activeSlug }: CurveTooltipProps) {
   if (!active || !payload?.length) return null;
-  const filtered = hoveredSlug
-    ? payload.filter((p) => p.name === hoveredSlug)
-    : [...payload].sort((a, b) => b.value - a.value).slice(0, 6);
+  const activeRow = payload.find((p) => p.name === activeSlug);
+  const others = [...payload]
+    .filter((p) => p.name !== activeSlug)
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 5);
   return (
     <div className="rounded-md border border-slate-200 bg-white p-3 text-xs shadow-md">
       <p className="mb-2 font-semibold text-slate-900">
         Gross {label ? formatEURCompact(label) : ""}
       </p>
       <div className="space-y-1">
-        {filtered.map((p) => (
+        {activeRow && (
+          <div
+            className="flex items-center justify-between gap-6 font-semibold"
+            style={{ color: activeRow.color }}
+          >
+            <span>{activeRow.name}</span>
+            <span className="tabular-nums">{formatPercent(activeRow.value)}</span>
+          </div>
+        )}
+        {others.map((p) => (
           <div
             key={p.name}
-            className="flex items-center justify-between gap-6"
-            style={{ color: p.color }}
+            className="flex items-center justify-between gap-6 text-slate-500"
           >
-            <span className="font-medium">{p.name}</span>
+            <span>{p.name}</span>
             <span className="tabular-nums">{formatPercent(p.value)}</span>
           </div>
         ))}
       </div>
-      {!hoveredSlug && (
-        <p className="mt-2 text-[10px] uppercase tracking-wider text-slate-400">
-          Hover a city to isolate
-        </p>
-      )}
     </div>
   );
 }

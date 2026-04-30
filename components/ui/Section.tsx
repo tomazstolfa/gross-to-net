@@ -6,7 +6,7 @@ type Props = {
   className?: string;
   eyebrow?: string;
   title?: string;
-  lede?: string;
+  lede?: ReactNode;
 };
 
 export function Section({ id, children, className = "", eyebrow, title, lede }: Props) {
