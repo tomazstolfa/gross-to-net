@@ -14,7 +14,7 @@ import { formatEUR, formatNumber, formatPercent } from "@/lib/format";
 const COPY: Record<string, { title: string; lede: string }> = {
   Ljubljana: {
     title: "A 50% bracket that starts early. No social-security ceiling.",
-    lede: "Most European systems cap social security somewhere. Slovenia does not. Combined with the 50% bracket above €74k, the effective wedge clears 60% on executive pay.",
+    lede: "Most European systems cap social security somewhere. Slovenia does not. Combined with the 50% bracket above €78k, the effective wedge clears 60% on executive pay.",
   },
   Milan: {
     title: "Top rate at €50k. Layered surcharges. Uncapped INPS.",
@@ -30,7 +30,7 @@ const COPY: Record<string, { title: string; lede: string }> = {
   },
   Amsterdam: {
     title: "One bracket does most of the work, and it kicks in early.",
-    lede: "The 49.5% rate starts around €76k. Employer contributions plateau near €71k, keeping the wedge nearly flat across executive bands.",
+    lede: "The 49.5% rate starts around €78k. Employer contributions plateau near €71k, keeping the wedge nearly flat across executive bands.",
   },
   Barcelona: {
     title: "A 50% top rate, softened by the social-security cap.",
@@ -45,8 +45,8 @@ const COPY: Record<string, { title: string; lede: string }> = {
     lede: "The standard rate cut-off arrives early. PAYE, USC, and PRSI compound at executive levels; transferable bands and the home-carer credit reshape the family profile.",
   },
   Copenhagen: {
-    title: "Topskat above €78k. Employer charges stay tiny.",
-    lede: "AM-bidrag, municipal tax, and topskat layer to a 56% marginal rate. The employer side is essentially flat fees — unusual in Europe.",
+    title: "Topskat above €113k after the 2026 reform. Employer charges stay tiny.",
+    lede: "AM-bidrag, municipal tax, and the new mellemskat/topskat schedule layer to a 60.5% marginal cap. The employer side is essentially flat fees — unusual in Europe.",
   },
   Tallinn: {
     title: "Flat 22%. The curve barely bends.",
@@ -100,7 +100,10 @@ export function CityProfile() {
           <p className="mt-4 text-base leading-relaxed text-stone-600">
             {formatEUR(cell.employerCost)} of employer outlay buys you{" "}
             {formatEUR(cell.net)} of net take-home — a wedge of{" "}
-            {formatPercent(cell.wedge)}.
+            <span className="font-semibold text-red-700">
+              {formatPercent(cell.wedge)}
+            </span>
+            .
           </p>
         </div>
         <div className="rounded-xl border-l-4 border-emerald-500 bg-emerald-50/60 p-6 lg:col-span-2">

@@ -18,11 +18,9 @@ import { realCities } from "@/lib/data";
 import { formatEUR, formatEURCompact, formatPercent } from "@/lib/format";
 
 const STONE_400 = "#a8a29e";
-const STONE_700 = "#44403c";
-const EMERALD_500 = "#10b981";
+const RED_700 = "#b91c1c";
 const EMERALD_300 = "#6ee7b7";
 const SKY_300 = "#7dd3fc";
-const SKY_600 = "#0284c7";
 
 export function StackedBarChart() {
   const { salary, profile, selectedSlug, hoveredSlug, setHoveredSlug } =
@@ -102,12 +100,9 @@ export function StackedBarChart() {
               }
               onMouseLeave={() => setHoveredSlug(null)}
             >
-              {chartData.map((d) => {
-                const isPinned = d.name === selectedSlug;
-                const isHovered = !isPinned && d.name === hoveredSlug;
-                const fill = isPinned ? EMERALD_500 : isHovered ? SKY_600 : STONE_700;
-                return <Cell key={`tax-${d.name}`} fill={fill} />;
-              })}
+              {chartData.map((d) => (
+                <Cell key={`tax-${d.name}`} fill={RED_700} />
+              ))}
             </Bar>
           </BarChart>
         </ResponsiveContainer>
@@ -120,8 +115,8 @@ export function StackedBarChart() {
 function Legend() {
   return (
     <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-stone-600">
-      <Swatch color={STONE_700} label="Tax collected" />
-      <Swatch color={STONE_400} label="Net take-home" />
+      <Swatch color={RED_700} label="Tax — to the state" />
+      <Swatch color={STONE_400} label="Net — to you" />
       <span className="text-stone-400">·</span>
       <span className="text-emerald-700">Emerald: pinned</span>
       <span className="text-stone-400">·</span>
@@ -165,21 +160,32 @@ function CustomTooltip({ active, payload }: TooltipProps) {
       <p className="mb-1 font-semibold text-stone-900">
         {d.name} · {d.country}
       </p>
-      <Row label="Employer cost" value={formatEUR(d.employerCost)} bold />
-      <Row label="Tax collected" value={formatEUR(d.tax)} />
-      <Row label="Net" value={formatEUR(d.net)} />
+      <Row label="Cost to employer" value={formatEUR(d.employerCost)} bold />
+      <Row label="To the state" value={formatEUR(d.tax)} taxAccent />
+      <Row label="To you (net)" value={formatEUR(d.net)} />
       <Row label="Wedge" value={formatPercent(d.wedge)} />
     </div>
   );
 }
 
-function Row({ label, value, bold }: { label: string; value: string; bold?: boolean }) {
+function Row({
+  label,
+  value,
+  bold,
+  taxAccent,
+}: {
+  label: string;
+  value: string;
+  bold?: boolean;
+  taxAccent?: boolean;
+}) {
+  const cls = taxAccent
+    ? "text-red-700"
+    : bold
+      ? "font-semibold text-stone-900"
+      : "text-stone-600";
   return (
-    <div
-      className={`flex justify-between gap-6 ${
-        bold ? "font-semibold text-stone-900" : "text-stone-600"
-      }`}
-    >
+    <div className={`flex justify-between gap-6 ${cls}`}>
       <span>{label}</span>
       <span className="tabular-nums">{value}</span>
     </div>

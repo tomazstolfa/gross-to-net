@@ -16,7 +16,7 @@ import { Controls } from "./ui/Controls";
 import { findCity, SALARY_POINTS, type CityData } from "@/lib/data";
 import { formatEUR, formatEURCompact, formatPercent } from "@/lib/format";
 
-const STONE_700 = "#44403c";
+const RED_700 = "#b91c1c";
 const EMERALD_400 = "#34d399";
 
 export function ProgressiveCurve() {
@@ -61,8 +61,8 @@ export function ProgressiveCurve() {
                 <stop offset="100%" stopColor={EMERALD_400} stopOpacity={0.7} />
               </linearGradient>
               <linearGradient id="taxFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={STONE_700} stopOpacity={0.9} />
-                <stop offset="100%" stopColor={STONE_700} stopOpacity={0.75} />
+                <stop offset="0%" stopColor={RED_700} stopOpacity={0.9} />
+                <stop offset="100%" stopColor={RED_700} stopOpacity={0.75} />
               </linearGradient>
             </defs>
             <CartesianGrid stroke="#e7e5e4" vertical={false} />
@@ -104,7 +104,7 @@ export function ProgressiveCurve() {
               type="monotone"
               dataKey="taxShare"
               stackId="1"
-              stroke="#292524"
+              stroke="#7f1d1d"
               strokeWidth={1.5}
               fill="url(#taxFill)"
               name="Tax share"
@@ -121,8 +121,8 @@ export function ProgressiveCurve() {
 function Legend() {
   return (
     <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-stone-600">
-      <Swatch color={STONE_700} label="Tax collected" />
-      <Swatch color={EMERALD_400} label="Net take-home" />
+      <Swatch color={RED_700} label="Tax — to the state" />
+      <Swatch color={EMERALD_400} label="Net — to you" />
       <span className="text-stone-400">·</span>
       <span>Each column = 100% of what your employer pays.</span>
     </div>
@@ -167,15 +167,16 @@ function AreaTooltip({ active, label, payload }: TooltipProps) {
         Gross {label ? formatEURCompact(label) : ""}
       </p>
       <Row
-        label="Net share"
+        label="To you (net)"
         value={`${formatPercent(d.netShare)} · ${formatEUR(d.net)}`}
         bold
       />
       <Row
-        label="Tax share"
+        label="To the state"
         value={`${formatPercent(d.taxShare)} · ${formatEUR(d.tax)}`}
+        taxAccent
       />
-      <Row label="Employer cost" value={formatEUR(d.employerCost)} />
+      <Row label="Cost to employer" value={formatEUR(d.employerCost)} />
     </div>
   );
 }
@@ -184,17 +185,20 @@ function Row({
   label,
   value,
   bold,
+  taxAccent,
 }: {
   label: string;
   value: string;
   bold?: boolean;
+  taxAccent?: boolean;
 }) {
+  const cls = taxAccent
+    ? "text-red-700"
+    : bold
+      ? "font-semibold text-stone-900"
+      : "text-stone-600";
   return (
-    <div
-      className={`flex justify-between gap-6 ${
-        bold ? "font-semibold text-stone-900" : "text-stone-600"
-      }`}
-    >
+    <div className={`flex justify-between gap-6 ${cls}`}>
       <span>{label}</span>
       <span className="tabular-nums">{value}</span>
     </div>
