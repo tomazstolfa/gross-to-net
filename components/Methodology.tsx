@@ -149,6 +149,24 @@ export function Methodology() {
               €50k values as approximate.
             </li>
             <li>
+              <strong className="text-stone-900">Denmark: 2026 topskat reform.</strong>{" "}
+              Denmark&apos;s 2026 budget split topskat (was 15%) into a new
+              mellemskat (7.5%, starting earlier) and a reduced topskat (7.5% above
+              DKK 845,543), plus a 5% top-top tax above DKK 2.6M. The Copenhagen cells
+              were sourced before the reform took full effect; treat them as
+              approximate at the high end until the next data refresh.
+            </li>
+            <li>
+              <strong className="text-stone-900">Validation pass.</strong>{" "}
+              Headline rates, bracket thresholds, and SS caps in `taxStructure` were
+              cross-checked against PwC Worldwide Tax Summaries 2025/2026 in April
+              2026. Cell-level values were spot-checked at €100k single for SI, IT,
+              DE, NL, ES, HR, EE — all within ±3% of independent bracket
+              recomputation. A full per-cell recomputation is deferred; the dataset
+              is best treated as accurate to the nearest few hundred euros, not the
+              euro.
+            </li>
+            <li>
               <strong className="text-stone-900">Estonia.</strong> The 24% rate planned
               for 2026 was cancelled by the Riigikogu in December 2025. The 22% flat
               rate is used.
