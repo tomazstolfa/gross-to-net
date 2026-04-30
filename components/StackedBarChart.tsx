@@ -16,11 +16,7 @@ import { useHighlight } from "./ui/HighlightContext";
 import { Controls } from "./ui/Controls";
 import { realCities } from "@/lib/data";
 import { formatEUR, formatEURCompact, formatPercent } from "@/lib/format";
-
-const STONE_400 = "#a8a29e";
-const RED_700 = "#b91c1c";
-const EMERALD_300 = "#6ee7b7";
-const SKY_300 = "#7dd3fc";
+import { CHART_COLORS, NET_STOPS, TAX_STOPS } from "@/lib/chart-style";
 
 export function StackedBarChart() {
   const { salary, profile, selectedSlug, hoveredSlug, setHoveredSlug } =
@@ -56,6 +52,24 @@ export function StackedBarChart() {
             data={chartData}
             margin={{ top: 12, right: 12, bottom: 56, left: 12 }}
           >
+            <defs>
+              <linearGradient id="barTaxFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={CHART_COLORS.red} stopOpacity={TAX_STOPS.top} />
+                <stop offset="100%" stopColor={CHART_COLORS.red} stopOpacity={TAX_STOPS.bottom} />
+              </linearGradient>
+              <linearGradient id="barNetStone" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={CHART_COLORS.stone} stopOpacity={NET_STOPS.top} />
+                <stop offset="100%" stopColor={CHART_COLORS.stone} stopOpacity={NET_STOPS.bottom} />
+              </linearGradient>
+              <linearGradient id="barNetEmerald" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={CHART_COLORS.emerald} stopOpacity={NET_STOPS.top} />
+                <stop offset="100%" stopColor={CHART_COLORS.emerald} stopOpacity={NET_STOPS.bottom} />
+              </linearGradient>
+              <linearGradient id="barNetSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={CHART_COLORS.sky} stopOpacity={NET_STOPS.top} />
+                <stop offset="100%" stopColor={CHART_COLORS.sky} stopOpacity={NET_STOPS.bottom} />
+              </linearGradient>
+            </defs>
             <CartesianGrid stroke="#e7e5e4" vertical={false} />
             <XAxis
               dataKey="name"
@@ -87,7 +101,11 @@ export function StackedBarChart() {
               {chartData.map((d) => {
                 const isPinned = d.name === selectedSlug;
                 const isHovered = !isPinned && d.name === hoveredSlug;
-                const fill = isPinned ? EMERALD_300 : isHovered ? SKY_300 : STONE_400;
+                const fill = isPinned
+                  ? "url(#barNetEmerald)"
+                  : isHovered
+                    ? "url(#barNetSky)"
+                    : "url(#barNetStone)";
                 return <Cell key={`net-${d.name}`} fill={fill} />;
               })}
             </Bar>
@@ -101,7 +119,7 @@ export function StackedBarChart() {
               onMouseLeave={() => setHoveredSlug(null)}
             >
               {chartData.map((d) => (
-                <Cell key={`tax-${d.name}`} fill={RED_700} />
+                <Cell key={`tax-${d.name}`} fill="url(#barTaxFill)" />
               ))}
             </Bar>
           </BarChart>
@@ -115,8 +133,8 @@ export function StackedBarChart() {
 function Legend() {
   return (
     <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-stone-600">
-      <Swatch color={RED_700} label="Tax — to the state" />
-      <Swatch color={STONE_400} label="Net — to you" />
+      <Swatch color={CHART_COLORS.red} label="Tax — to the state" />
+      <Swatch color={CHART_COLORS.stone} label="Net — to you" />
       <span className="text-stone-400">·</span>
       <span className="text-emerald-700">Emerald: pinned</span>
       <span className="text-stone-400">·</span>

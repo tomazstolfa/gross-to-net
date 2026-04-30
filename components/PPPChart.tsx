@@ -16,10 +16,7 @@ import { useHighlight } from "./ui/HighlightContext";
 import { Controls } from "./ui/Controls";
 import { realCities, realNetPpp, PPP_BASELINE } from "@/lib/data";
 import { formatEUR, formatEURCompact } from "@/lib/format";
-
-const STONE_500 = "#78716c";
-const EMERALD_500 = "#10b981";
-const SKY_500 = "#0ea5e9";
+import { CHART_COLORS, NET_STOPS } from "@/lib/chart-style";
 
 export function PPPChart() {
   const { salary, profile, selectedSlug, hoveredSlug, setHoveredSlug } =
@@ -54,6 +51,20 @@ export function PPPChart() {
             data={chartData}
             margin={{ top: 12, right: 12, bottom: 56, left: 12 }}
           >
+            <defs>
+              <linearGradient id="pppStone" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={CHART_COLORS.stone} stopOpacity={NET_STOPS.top} />
+                <stop offset="100%" stopColor={CHART_COLORS.stone} stopOpacity={NET_STOPS.bottom} />
+              </linearGradient>
+              <linearGradient id="pppEmerald" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={CHART_COLORS.emerald} stopOpacity={NET_STOPS.top} />
+                <stop offset="100%" stopColor={CHART_COLORS.emerald} stopOpacity={NET_STOPS.bottom} />
+              </linearGradient>
+              <linearGradient id="pppSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={CHART_COLORS.sky} stopOpacity={NET_STOPS.top} />
+                <stop offset="100%" stopColor={CHART_COLORS.sky} stopOpacity={NET_STOPS.bottom} />
+              </linearGradient>
+            </defs>
             <CartesianGrid stroke="#e7e5e4" vertical={false} />
             <XAxis
               dataKey="name"
@@ -84,7 +95,11 @@ export function PPPChart() {
               {chartData.map((d) => {
                 const isPinned = d.name === selectedSlug;
                 const isHovered = !isPinned && d.name === hoveredSlug;
-                const fill = isPinned ? EMERALD_500 : isHovered ? SKY_500 : STONE_500;
+                const fill = isPinned
+                  ? "url(#pppEmerald)"
+                  : isHovered
+                    ? "url(#pppSky)"
+                    : "url(#pppStone)";
                 return <Cell key={`real-${d.name}`} fill={fill} />;
               })}
             </Bar>

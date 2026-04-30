@@ -15,9 +15,7 @@ import { useHighlight } from "./ui/HighlightContext";
 import { Controls } from "./ui/Controls";
 import { findCity, SALARY_POINTS, type CityData } from "@/lib/data";
 import { formatEUR, formatEURCompact, formatPercent } from "@/lib/format";
-
-const RED_700 = "#b91c1c";
-const EMERALD_400 = "#34d399";
+import { CHART_COLORS, NET_STOPS, TAX_STOPS } from "@/lib/chart-style";
 
 export function ProgressiveCurve() {
   const { profile, selectedSlug } = useHighlight();
@@ -57,12 +55,12 @@ export function ProgressiveCurve() {
           >
             <defs>
               <linearGradient id="netFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={EMERALD_400} stopOpacity={0.95} />
-                <stop offset="100%" stopColor={EMERALD_400} stopOpacity={0.7} />
+                <stop offset="0%" stopColor={CHART_COLORS.emerald} stopOpacity={NET_STOPS.top} />
+                <stop offset="100%" stopColor={CHART_COLORS.emerald} stopOpacity={NET_STOPS.bottom} />
               </linearGradient>
               <linearGradient id="taxFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={RED_700} stopOpacity={0.9} />
-                <stop offset="100%" stopColor={RED_700} stopOpacity={0.75} />
+                <stop offset="0%" stopColor={CHART_COLORS.red} stopOpacity={TAX_STOPS.top} />
+                <stop offset="100%" stopColor={CHART_COLORS.red} stopOpacity={TAX_STOPS.bottom} />
               </linearGradient>
             </defs>
             <CartesianGrid stroke="#e7e5e4" vertical={false} />
@@ -94,9 +92,9 @@ export function ProgressiveCurve() {
               type="monotone"
               dataKey="netShare"
               stackId="1"
-              stroke="#10b981"
-              strokeWidth={1.5}
+              stroke="none"
               fill="url(#netFill)"
+              fillOpacity={1}
               name="Net share"
               isAnimationActive={false}
             />
@@ -104,9 +102,9 @@ export function ProgressiveCurve() {
               type="monotone"
               dataKey="taxShare"
               stackId="1"
-              stroke="#7f1d1d"
-              strokeWidth={1.5}
+              stroke="none"
               fill="url(#taxFill)"
+              fillOpacity={1}
               name="Tax share"
               isAnimationActive={false}
             />
@@ -121,8 +119,8 @@ export function ProgressiveCurve() {
 function Legend() {
   return (
     <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-stone-600">
-      <Swatch color={RED_700} label="Tax — to the state" />
-      <Swatch color={EMERALD_400} label="Net — to you" />
+      <Swatch color={CHART_COLORS.red} label="Tax — to the state" />
+      <Swatch color={CHART_COLORS.emerald} label="Net — to you" />
       <span className="text-stone-400">·</span>
       <span>Each column = 100% of what your employer pays.</span>
     </div>
