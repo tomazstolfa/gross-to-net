@@ -5,6 +5,7 @@ import {
   CartesianGrid,
   Line,
   LineChart,
+  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -17,10 +18,11 @@ import { realCities, SALARY_POINTS } from "@/lib/data";
 import { formatEURCompact, formatPercent } from "@/lib/format";
 
 const SLATE_300 = "#cbd5e1";
+const SLATE_500 = "#64748b";
 const AMBER_500 = "#f59e0b";
 
 export function ProgressiveCurve() {
-  const { profile, effectiveSlug, setHoveredSlug } = useHighlight();
+  const { salary, profile, effectiveSlug, setHoveredSlug } = useHighlight();
 
   const chartData = useMemo(() => {
     return SALARY_POINTS.map((point) => {
@@ -38,8 +40,8 @@ export function ProgressiveCurve() {
     <Section
       id="progressive"
       eyebrow="Progressivity"
-      title="Where each country's curve bends."
-      lede="Effective wedge as gross income climbs from €70k to €250k. Flat-tax regimes (Estonia) plateau; progressive regimes (Italy, Slovenia, Ireland) ramp hard. The pinned city's line is highlighted; hover any city to swap."
+      title="How the wedge moves as gross rises."
+      lede="Each line is one country, plotted across five gross-salary points. Flat regimes plateau; progressive regimes ramp. The pinned city stands out; the dashed line marks the salary you've selected above."
     >
       <Controls className="mb-6" />
       <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
@@ -61,11 +63,23 @@ export function ProgressiveCurve() {
             />
             <YAxis
               tickFormatter={(v) => formatPercent(v)}
-              domain={[0.3, 0.7]}
+              domain={[0.2, 0.7]}
               tick={{ fontSize: 12, fill: "#64748b" }}
               tickLine={false}
               axisLine={{ stroke: "#cbd5e1" }}
               width={48}
+            />
+            <ReferenceLine
+              x={salary}
+              stroke={SLATE_500}
+              strokeDasharray="4 4"
+              ifOverflow="extendDomain"
+              label={{
+                value: formatEURCompact(salary),
+                position: "top",
+                fontSize: 11,
+                fill: SLATE_500,
+              }}
             />
             <Tooltip
               content={<CurveTooltip activeSlug={effectiveSlug} />}

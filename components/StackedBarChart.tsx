@@ -44,9 +44,9 @@ export function StackedBarChart() {
   return (
     <Section
       id="stacked"
-      eyebrow="Where the money goes"
-      title="Tax + net = employer cost."
-      lede="Each bar is one city's annual employer cost, broken into the state's take and your take. Sorted by total cost. Hover to preview, click in the table to pin."
+      eyebrow="Composition"
+      title="Each bar is what the employer pays, split."
+      lede="Bottom: what lands in the bank. Top: what goes to the state in income tax, social security, and surcharges. Sorted by total employer cost."
     >
       <Controls className="mb-6" />
       <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
@@ -118,9 +118,9 @@ function Legend() {
   return (
     <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-600">
       <Swatch color={SLATE_700} label="Tax collected" />
-      <Swatch color={SLATE_400} label="Net" />
-      <Swatch color={AMBER_500} label="Highlighted: tax" />
-      <Swatch color={AMBER_300} label="Highlighted: net" />
+      <Swatch color={SLATE_400} label="Net take-home" />
+      <span className="text-slate-400">·</span>
+      <span className="text-amber-700">Amber bar: pinned city.</span>
     </div>
   );
 }

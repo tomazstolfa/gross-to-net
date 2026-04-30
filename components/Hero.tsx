@@ -8,19 +8,18 @@ export function Hero() {
           gross-to-net
         </p>
         <h1 className="text-balance font-serif text-4xl font-semibold leading-[1.1] text-slate-900 sm:text-5xl md:text-6xl lg:text-7xl">
-          How much of your salary survives the trip from your employer&apos;s payroll to
-          your bank account?
+          From employer cost to net take-home, across Europe.
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 sm:text-xl">
-          Employer cost, tax wedge, and net take-home across 13 European cities — all in
-          EUR, with PPP normalization.
+          Thirteen cities, five salary points, two household profiles. All values in
+          EUR, with a separate view normalized for what each net actually buys.
         </p>
         <div className="mt-10 flex flex-wrap gap-3">
           <a
             href="#table"
             className="rounded-md bg-slate-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-800"
           >
-            Open the comparison
+            Open the table
           </a>
           <a
             href="#methodology"
@@ -30,8 +29,8 @@ export function Hero() {
           </a>
         </div>
         <p className="mt-12 text-xs text-slate-500">
-          Data vintage: {DATA_VINTAGE} · Single filer and married single-earner (2
-          children) profiles.
+          Data vintage {DATA_VINTAGE}. Single filer and married single-earner with two
+          children.
         </p>
       </div>
     </section>

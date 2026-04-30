@@ -18,22 +18,22 @@ export function FourNumbers() {
     {
       label: "Employer cost",
       value: formatEUR(cell.employerCost),
-      blurb: "Total annual outlay: gross salary plus employer social security.",
+      blurb: "Total annual outlay. Gross salary plus the employer's share of social security.",
     },
     {
       label: "Tax collected",
       value: formatEUR(cell.taxCollected),
-      blurb: "Income tax, employee SS, employer SS, and surcharges going to the state.",
+      blurb: "Everything routed to the state: income tax, employee and employer social security, surcharges.",
     },
     {
-      label: "Net in pocket",
+      label: "Net take-home",
       value: formatEUR(cell.net),
-      blurb: "What lands in the bank after every deduction.",
+      blurb: "What reaches the bank account after every deduction.",
     },
     {
-      label: "€ per €1 net",
+      label: "€ per €1 of net",
       value: formatNumber(eurPerEuroNet(cell)),
-      blurb: `Employer spends this many euros for every €1 you bank. Wedge: ${formatPercent(
+      blurb: `Euros the employer spends for every €1 the employee banks. Effective wedge: ${formatPercent(
         cell.wedge,
       )}.`,
     },
@@ -42,16 +42,15 @@ export function FourNumbers() {
   return (
     <Section
       id="four-numbers"
-      eyebrow="The four numbers that matter"
-      title="Most salary debates confuse these. They are not the same."
+      eyebrow="Four numbers, not one"
+      title="Salary, tax, net, and employer outlay are different numbers."
       lede={
         <>
-          Live preview for <CityPicker variant="inline" />. Hover any row in the
-          comparison below to temporarily preview another city; the dropdown stays put.
+          Showing <CityPicker variant="inline" /> at the salary and profile selected
+          below. Hover any row in the table to preview another city without losing your
+          pick.
           {hoveredSlug && hoveredSlug !== city.name && (
-            <span className="ml-1 text-amber-700">
-              (Showing hovered: {hoveredSlug})
-            </span>
+            <span className="ml-1 text-amber-700">Previewing {hoveredSlug}.</span>
           )}
         </>
       }

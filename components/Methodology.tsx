@@ -80,7 +80,7 @@ export function Methodology() {
       id="methodology"
       eyebrow="Methodology"
       title="How the numbers were built."
-      lede="Plain prose, click to expand. The intent is to be wrong less than the alternative — none of these numbers replace your accountant."
+      lede="Sources, profile assumptions, FX snapshot, PPP method, and known omissions. None of the figures here are a substitute for an accountant."
     >
       <div className="space-y-3">
         <Detail summary="Sources">
@@ -105,62 +105,63 @@ export function Methodology() {
         </Detail>
         <Detail summary="Profiles">
           <p>
-            <strong className="text-slate-900">Single</strong> = one earner, no
-            children, age 30, standard employment contract, no special expat/researcher
-            regime.
+            <strong className="text-slate-900">Single.</strong> One earner, age 30, no
+            children, standard employment contract, no expat or researcher regime.
           </p>
           <p>
-            <strong className="text-slate-900">Family</strong> = married single-earner
-            with two children under 12. Spousal allowance and child-related credits
-            (e.g. German Kindergeld + Ehegattensplitting, Irish home-carer credit,
-            Slovenian otroški dodatek) applied where standard.
+            <strong className="text-slate-900">Family.</strong> Married single-earner
+            with two children under 12. Spousal allowances and child-related credits
+            applied where they form part of the standard regime — e.g. German
+            Ehegattensplitting plus Kindergeld, Irish home-carer credit, Slovenian
+            otroški dodatek.
           </p>
         </Detail>
         <Detail summary="Currency and FX">
           <p>
-            All values normalized to EUR. Two FX inputs are used — GBP/EUR ={" "}
-            <span className="font-mono">{FX.GBP_PER_EUR}</span> and PLN/EUR ={" "}
-            <span className="font-mono">{FX.PLN_PER_EUR}</span> — snapshot dated{" "}
+            All values normalized to EUR. Two FX inputs:{" "}
+            <span className="font-mono">GBP/EUR {FX.GBP_PER_EUR}</span> and{" "}
+            <span className="font-mono">PLN/EUR {FX.PLN_PER_EUR}</span>, snapshot dated{" "}
             {DATA_VINTAGE}. Daily noise is not modelled.
           </p>
         </Detail>
         <Detail summary="PPP normalization">
           <p>
-            The Numbeo cost-of-living-ex-rent index is used because rent is a choice
-            while groceries, transit and services are roughly fixed for comparable
-            lifestyles. The baseline of {PPP_BASELINE} is a stand-in for the EU-27
-            average. A city with index 75 (London) divides nominal net by 75/
-            {PPP_BASELINE}; a city with index 42 (Warsaw) multiplies it.
+            Net amounts are divided by the city&apos;s Numbeo cost-of-living-ex-rent
+            index, rebased to {PPP_BASELINE} (≈ EU-27 average). Rent is excluded
+            because it&apos;s largely a choice; groceries, transit, and services are closer to fixed
+            costs for a comparable lifestyle. London at index 75 is divided by
+            75/{PPP_BASELINE}; Warsaw at 42 is multiplied.
           </p>
         </Detail>
         <Detail summary="Caveats">
           <ul className="space-y-2">
             <li>
-              <strong className="text-slate-900">Special regimes excluded</strong>: NL
-              30% ruling, ES Beckham law, IT impatriati, PL IP-Box. These materially
-              change the picture for many readers; we plan to add a toggle.
+              <strong className="text-slate-900">Special regimes are excluded.</strong>{" "}
+              No NL 30% ruling, no ES Beckham law, no IT impatriati, no PL IP-Box.
+              These materially change the picture for many readers and will arrive as
+              a toggle.
             </li>
             <li>
-              <strong className="text-slate-900">Estonia</strong>: the 24% rate planned
+              <strong className="text-slate-900">Estonia.</strong> The 24% rate planned
               for 2026 was cancelled by the Riigikogu in December 2025. The 22% flat
               rate is used.
             </li>
             <li>
-              <strong className="text-slate-900">Employer SS</strong> uses the statutory
-              rate where it applies; in regimes with a cap (DE, NL, ES, PL, HR) the cap
-              is honoured and any solidarity-style charge above the cap is included.
+              <strong className="text-slate-900">Employer social security</strong> uses
+              statutory rates. In regimes with a cap (DE, NL, ES, PL, HR) the cap is
+              honoured; any solidarity-style charge above it is included.
             </li>
             <li>
-              <strong className="text-slate-900">No church tax</strong> (DE, DK), no
-              compulsory private health on top, no equity comp.
+              <strong className="text-slate-900">Excluded.</strong> Church tax (DE,
+              DK), supplementary private health, and equity compensation.
             </li>
           </ul>
         </Detail>
         <Detail summary="Update cadence">
           <p>
-            Snapshots track major changes only — annual brackets, headline
-            social-security rate moves. The current vintage is{" "}
-            <span className="font-mono">{DATA_VINTAGE}</span>. PRs welcome.
+            Snapshots track headline changes only — annual brackets and meaningful
+            social-security moves. Current vintage:{" "}
+            <span className="font-mono">{DATA_VINTAGE}</span>. Pull requests welcome.
           </p>
         </Detail>
       </div>
