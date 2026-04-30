@@ -18,39 +18,35 @@ export function FourNumbers() {
     {
       label: "Employer cost",
       value: formatEUR(cell.employerCost),
-      blurb: "Total annual outlay. Gross salary plus the employer's share of social security.",
+      blurb: "Gross salary plus the employer's share of social security.",
     },
     {
       label: "Tax collected",
       value: formatEUR(cell.taxCollected),
-      blurb: "Everything routed to the state: income tax, employee and employer social security, surcharges.",
+      blurb: "Income tax, both sides of social security, surcharges.",
     },
     {
       label: "Net take-home",
       value: formatEUR(cell.net),
-      blurb: "What reaches the bank account after every deduction.",
+      blurb: "What lands in the bank after every deduction.",
     },
     {
       label: "€ per €1 of net",
       value: formatNumber(eurPerEuroNet(cell)),
-      blurb: `Euros the employer spends for every €1 the employee banks. Effective wedge: ${formatPercent(
-        cell.wedge,
-      )}.`,
+      blurb: `Cost per €1 of net. Effective wedge ${formatPercent(cell.wedge)}.`,
     },
   ];
 
   return (
     <Section
       id="four-numbers"
-      eyebrow="Four numbers, not one"
-      title="Salary, tax, net, and employer outlay are different numbers."
+      eyebrow="Selected city"
+      title="What the employer pays, what the state takes, what's left."
       lede={
         <>
-          Showing <CityPicker variant="inline" /> at the salary and profile selected
-          below. Hover any row in the table to preview another city without losing your
-          pick.
+          <CityPicker variant="inline" />
           {hoveredSlug && hoveredSlug !== city.name && (
-            <span className="ml-1 text-amber-700">Previewing {hoveredSlug}.</span>
+            <span className="ml-2 text-amber-700">— previewing {hoveredSlug}</span>
           )}
         </>
       }

@@ -43,7 +43,7 @@ export function PPPChart() {
       id="ppp"
       eyebrow="Purchasing power"
       title="Net, adjusted for what things cost."
-      lede={`Each net amount divided by Numbeo's ex-rent index, rebased to ${PPP_BASELINE} (≈ EU average). A high-tax city in a cheap country can outrank a low-tax city in an expensive one.`}
+      lede={`Net divided by Numbeo's ex-rent index, baseline ${PPP_BASELINE} ≈ EU average. A high-tax city in a cheap country can outrank a low-tax city in an expensive one.`}
     >
       <Controls className="mb-6" />
       <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">

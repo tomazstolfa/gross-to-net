@@ -11,8 +11,8 @@ export function Hero() {
           From employer cost to net take-home, across Europe.
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 sm:text-xl">
-          Thirteen cities, five salary points, two household profiles. All values in
-          EUR, with a separate view normalized for what each net actually buys.
+          Thirteen cities. Five salary points. Two household profiles. EUR throughout,
+          with a separate view normalised for local cost of living.
         </p>
         <div className="mt-10 flex flex-wrap gap-3">
           <a
@@ -28,10 +28,7 @@ export function Hero() {
             Methodology
           </a>
         </div>
-        <p className="mt-12 text-xs text-slate-500">
-          Data vintage {DATA_VINTAGE}. Single filer and married single-earner with two
-          children.
-        </p>
+        <p className="mt-12 text-xs text-slate-500">Data vintage {DATA_VINTAGE}.</p>
       </div>
     </section>
   );

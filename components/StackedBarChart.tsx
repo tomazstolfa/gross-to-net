@@ -45,8 +45,8 @@ export function StackedBarChart() {
     <Section
       id="stacked"
       eyebrow="Composition"
-      title="Each bar is what the employer pays, split."
-      lede="Bottom: what lands in the bank. Top: what goes to the state in income tax, social security, and surcharges. Sorted by total employer cost."
+      title="Employer cost, split into net and tax."
+      lede="Bottom: net take-home. Top: tax collected. Sorted by total employer cost."
     >
       <Controls className="mb-6" />
       <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
@@ -120,7 +120,7 @@ function Legend() {
       <Swatch color={SLATE_700} label="Tax collected" />
       <Swatch color={SLATE_400} label="Net take-home" />
       <span className="text-slate-400">·</span>
-      <span className="text-amber-700">Amber bar: pinned city.</span>
+      <span className="text-amber-700">Amber: pinned city</span>
     </div>
   );
 }

@@ -80,7 +80,7 @@ export function Methodology() {
       id="methodology"
       eyebrow="Methodology"
       title="How the numbers were built."
-      lede="Sources, profile assumptions, FX snapshot, PPP method, and known omissions. None of the figures here are a substitute for an accountant."
+      lede="Sources, profiles, FX, PPP method, and known omissions."
     >
       <div className="space-y-3">
         <Detail summary="Sources">
