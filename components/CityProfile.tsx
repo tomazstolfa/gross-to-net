@@ -92,12 +92,13 @@ export function CityProfile() {
             At a glance
           </p>
           <p className="mt-3 font-serif text-3xl font-semibold leading-tight text-stone-900 sm:text-4xl">
-            For every <span className="text-emerald-600">€1</span> a {profile} employee
-            banks in {city.name} at {formatEUR(salary)} gross, the employer spends{" "}
+            For every <span className="text-emerald-600">€1</span> you bank as a{" "}
+            {profile} employee in {city.name} at {formatEUR(salary)} gross, your
+            employer spends{" "}
             <span className="text-emerald-600">€{formatNumber(ratio)}</span>.
           </p>
           <p className="mt-4 text-base leading-relaxed text-stone-600">
-            {formatEUR(cell.employerCost)} of employer outlay against{" "}
+            {formatEUR(cell.employerCost)} of employer outlay buys you{" "}
             {formatEUR(cell.net)} of net take-home — a wedge of{" "}
             {formatPercent(cell.wedge)}.
           </p>

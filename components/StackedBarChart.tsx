@@ -48,8 +48,8 @@ export function StackedBarChart() {
     <Section
       id="stacked"
       eyebrow="Composition"
-      title="Employer cost, split into net and tax."
-      lede="Bottom: net take-home. Top: tax collected. Sorted by total employer cost."
+      title="Where your salary really goes."
+      lede="Each bar is what your employer spends. Bottom: what you take home. Top: what the state takes. Sorted by total cost."
     >
       <Controls className="mb-6" />
       <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm sm:p-6">

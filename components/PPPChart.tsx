@@ -44,7 +44,7 @@ export function PPPChart() {
     <Section
       id="ppp"
       eyebrow="Purchasing power"
-      title="Net, adjusted for what things cost."
+      title="What your net actually buys."
       lede={`Net divided by Numbeo's ex-rent index, baseline ${PPP_BASELINE} ≈ EU average.`}
     >
       <Controls className="mb-6" />

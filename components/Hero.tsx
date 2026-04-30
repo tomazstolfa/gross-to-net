@@ -8,11 +8,12 @@ export function Hero() {
           gross-to-net
         </p>
         <h1 className="text-balance font-serif text-4xl font-semibold leading-[1.1] text-stone-900 sm:text-5xl md:text-6xl lg:text-7xl">
-          From employer cost to net take-home, across Europe.
+          What your employer really pays for you. What you actually keep.
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-stone-600 sm:text-xl">
-          Thirteen cities. Five salary points. Two household profiles. EUR throughout,
-          with a separate view normalised for local cost of living.
+          Thirteen European cities. Six salary points from €50k to €250k. Two household
+          profiles. EUR throughout, with a separate view normalised for local cost of
+          living.
         </p>
         <div className="mt-10 flex flex-wrap gap-3">
           <a
