@@ -3,6 +3,7 @@
 import { Section } from "./ui/Section";
 import { Card } from "./ui/Card";
 import { CityPicker } from "./ui/CityPicker";
+import { SalaryPicker } from "./ui/SalaryPicker";
 import { useHighlight } from "./ui/HighlightContext";
 import { findCity, eurPerEuroNet } from "@/lib/data";
 import { formatEUR, formatPercent, formatNumber } from "@/lib/format";
@@ -44,7 +45,7 @@ export function FourNumbers() {
       title="Your net, your tax, and what your employer pays."
       lede={
         <>
-          <CityPicker variant="inline" />
+          <CityPicker variant="inline" /> at <SalaryPicker variant="inline" />
           {hoveredSlug && hoveredSlug !== city.name && (
             <span className="ml-2 text-emerald-700">— previewing {hoveredSlug}</span>
           )}
