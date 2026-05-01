@@ -47,3 +47,14 @@ export const slugify = (s: string): string =>
     .toLowerCase()
     .replace(/\s+/g, "-")
     .replace(/[^a-z0-9-]/g, "");
+
+// ISO 3166-1 alpha-2 → flag emoji via regional indicator symbols.
+// "EU" maps via the same formula to 🇪🇺 (officially a user-assigned code).
+export const isoToFlag = (iso: string): string => {
+  if (iso.length !== 2) return "";
+  const codePoints = iso
+    .toUpperCase()
+    .split("")
+    .map((c) => 0x1f1e6 + c.charCodeAt(0) - 65);
+  return String.fromCodePoint(...codePoints);
+};

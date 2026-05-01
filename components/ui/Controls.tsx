@@ -8,7 +8,7 @@ import {
   type SalaryPoint,
   type Profile,
 } from "@/lib/data";
-import { formatEURCompact } from "@/lib/format";
+import { formatEURCompact, isoToFlag } from "@/lib/format";
 
 type ControlsProps = {
   className?: string;
@@ -143,7 +143,7 @@ function CitySelect({
         >
           {cities.map((c) => (
             <option key={c.name} value={c.name}>
-              {c.name}, {c.country}
+              {isoToFlag(c.iso)} {c.name}, {c.country}
             </option>
           ))}
         </select>

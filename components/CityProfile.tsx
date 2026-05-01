@@ -4,7 +4,7 @@ import { Section } from "./ui/Section";
 import { useHighlight } from "./ui/HighlightContext";
 import { Controls } from "./ui/Controls";
 import { findCity, eurPerEuroNet, type CityData } from "@/lib/data";
-import { formatEUR, formatNumber, formatPercent } from "@/lib/format";
+import { formatEUR, formatNumber, formatPercent, isoToFlag } from "@/lib/format";
 
 /**
  * Per-city editorial copy. Title + lede are hand-written for each entry so
@@ -81,7 +81,7 @@ export function CityProfile() {
   return (
     <Section
       id="city-profile"
-      eyebrow={`${city.name}, ${city.country}`}
+      eyebrow={`${isoToFlag(city.iso)} ${city.name}, ${city.country}`}
       title={copy.title}
       lede={copy.lede}
     >

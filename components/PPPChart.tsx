@@ -15,7 +15,7 @@ import { Section } from "./ui/Section";
 import { useHighlight } from "./ui/HighlightContext";
 import { Controls } from "./ui/Controls";
 import { realCities, realNetPpp, PPP_BASELINE } from "@/lib/data";
-import { formatEUR, formatEURCompact } from "@/lib/format";
+import { formatEUR, formatEURCompact, isoToFlag } from "@/lib/format";
 import { CHART_COLORS, NET_STOPS } from "@/lib/chart-style";
 
 export function PPPChart() {
@@ -28,6 +28,7 @@ export function PPPChart() {
       return {
         name: c.name,
         country: c.country,
+        iso: c.iso,
         nominalNet: cell.net,
         realNet: Math.round(realNetPpp(cell, c.col)),
         idx: c.col.numbeoIdxExRent,
@@ -116,6 +117,7 @@ type PPPTooltipProps = {
     payload: {
       name: string;
       country: string;
+      iso: string;
       nominalNet: number;
       realNet: number;
       idx: number;
@@ -129,7 +131,7 @@ function PPPTooltip({ active, payload }: PPPTooltipProps) {
   return (
     <div className="rounded-md border border-stone-200 bg-white p-3 text-xs shadow-md">
       <p className="mb-1 font-semibold text-stone-900">
-        {d.name} · {d.country}
+        {isoToFlag(d.iso)} {d.name} · {d.country}
       </p>
       <div className="flex justify-between gap-6 font-semibold text-stone-900">
         <span>What it buys you</span>
