@@ -155,16 +155,17 @@ export function Methodology() {
             </li>
             <li>
               <strong className="text-stone-900">Pension and Polish health.</strong>{" "}
-              Auto-enrolment pension contributions (Ireland&apos;s My Future Fund,
-              the UK&apos;s 5% workplace pension) are <em>not</em> counted as
-              tax — they are the employee&apos;s own retirement money, not state
-              revenue, and so they sit between gross and net but on the
-              employee&apos;s side of the ledger. Earlier vintages of the dataset
-              bundled them into <span className="font-mono">taxCollected</span>,
-              which understated Irish and UK net by €3–6k. Conversely, Poland&apos;s
-              9% non-deductible health levy <em>is</em> state revenue and was
-              missing from the previous Warsaw cells, which overstated net by
-              €4–9k. Both have been corrected in May 2026.
+              Mandatory pension contributions — Ireland&apos;s My Future Fund,
+              the UK&apos;s 5% workplace pension, Switzerland&apos;s BVG (2nd
+              pillar) — are <em>not</em> counted as tax. They are the
+              employee&apos;s own retirement money, not state revenue, and so
+              they sit between gross and net but on the employee&apos;s side of
+              the ledger. Earlier vintages of the dataset bundled the IE and
+              GB ones into <span className="font-mono">taxCollected</span>,
+              which understated Irish and UK net by €3–6k. Conversely,
+              Poland&apos;s 9% non-deductible health levy <em>is</em> state
+              revenue and was missing from the previous Warsaw cells, which
+              overstated net by €4–9k. Both corrected in May 2026.
             </li>
             <li>
               <strong className="text-stone-900">Denmark: 2026 topskat reform.</strong>{" "}
