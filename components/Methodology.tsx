@@ -142,48 +142,73 @@ export function Methodology() {
               a toggle.
             </li>
             <li>
-              <strong className="text-stone-900">€50k row methodology.</strong>{" "}
-              The €50k cells for Slovenia, Portugal, Netherlands, Spain, Croatia,
-              Denmark, and Estonia are computed directly from PwC 2025/2026 brackets
-              and SS rules via{" "}
-              <span className="font-mono">scripts/compute-cells.ts</span>; the engine
-              is calibrated against each country&apos;s €70k row and matches it
-              within ±5%. The €50k cells for Italy and Germany are still
-              extrapolated from €70k. Poland, Ireland, and the United Kingdom were
-              recomputed end-to-end (all six rows) from PwC brackets in May 2026 —
-              see &quot;Pension and Polish health&quot; below for what changed and why.
+              <strong className="text-stone-900">Government family transfers count toward net.</strong>{" "}
+              Cash transfers to families — Germany&apos;s Kindergeld (€259/mo/child),
+              Italy&apos;s Assegno Unico Universale (€58/mo/child at this income
+              band), Ireland&apos;s Child Benefit, the UK&apos;s Child Benefit
+              (when not clawed back), Denmark&apos;s børneydelse — are paid as cash
+              and counted toward family net, since they are real money landing
+              in the household. They do <em>not</em> count toward
+              <span className="font-mono"> taxCollected</span> (they are state-to-household
+              transfers, not state revenue).
             </li>
             <li>
-              <strong className="text-stone-900">Pension and Polish health.</strong>{" "}
+              <strong className="text-stone-900">Pension treatment.</strong>{" "}
               Mandatory pension contributions — Ireland&apos;s My Future Fund,
               the UK&apos;s 5% workplace pension, Switzerland&apos;s BVG (2nd
               pillar) — are <em>not</em> counted as tax. They are the
-              employee&apos;s own retirement money, not state revenue, and so
-              they sit between gross and net but on the employee&apos;s side of
-              the ledger. Earlier vintages of the dataset bundled the IE and
-              GB ones into <span className="font-mono">taxCollected</span>,
-              which understated Irish and UK net by €3–6k. Conversely,
-              Poland&apos;s 9% non-deductible health levy <em>is</em> state
-              revenue and was missing from the previous Warsaw cells, which
-              overstated net by €4–9k. Both corrected in May 2026.
+              employee&apos;s own retirement money, not state revenue, so they
+              sit between gross and net but on the employee&apos;s side of the
+              ledger. Conversely, Poland&apos;s 9% non-deductible health levy
+              <em> is</em> state revenue and was missing from the previous
+              Warsaw cells.
             </li>
             <li>
-              <strong className="text-stone-900">Denmark: 2026 topskat reform.</strong>{" "}
-              Denmark&apos;s 2026 budget split topskat (was 15%) into a new
-              mellemskat (7.5%, starting earlier) and a reduced topskat (7.5% above
-              DKK 845,543), plus a 5% top-top tax above DKK 2.6M. The Copenhagen cells
-              were sourced before the reform took full effect; treat them as
-              approximate at the high end until the next data refresh.
-            </li>
-            <li>
-              <strong className="text-stone-900">Validation pass.</strong>{" "}
-              Headline rates, bracket thresholds, and SS caps in `taxStructure` were
-              cross-checked against PwC Worldwide Tax Summaries 2025/2026 in April
-              2026. Cell-level values were spot-checked at €100k single for SI, IT,
-              DE, NL, ES, HR, EE — all within ±3% of independent bracket
-              recomputation. A full per-cell recomputation is deferred; the dataset
-              is best treated as accurate to the nearest few hundred euros, not the
-              euro.
+              <strong className="text-stone-900">Deep validation pass — May 2026.</strong>{" "}
+              An end-to-end recheck of the €50k and €70k cells against PwC
+              Worldwide Tax Summaries plus real national payroll calculators
+              (lohntastik.de for Germany, salaryaftertax.com / klarpay.dk for
+              Denmark, stipendionettocalcolatore.it for Italy, Coverflex /
+              Doutor Finanças for Portugal) surfaced four systematic issues
+              that have now been corrected end-to-end (all six rows for the
+              affected cities):
+              <ul className="ml-5 mt-2 list-disc space-y-1">
+                <li>
+                  <strong>Italy (Milan):</strong> previous net was systematically
+                  low by €2–3k. The 2026 budget law cut the second IRPEF
+                  bracket from 35% back to 33%, and the prior cells appear to
+                  have used too-aggressive INPS rates and missed the
+                  detrazione-lavoro phase-out. All twelve Milan cells now
+                  reflect the 2026 IRPEF schedule plus correct addizionali
+                  Lombardia/Milano + AUU for family.
+                </li>
+                <li>
+                  <strong>Germany (Berlin):</strong> family net was low by €3–4k
+                  across the curve. The prior cells appear not to have applied
+                  Steuerklasse III splitting properly. New values use lohntastik.de
+                  2026 directly for €50k/€70k and PwC Lohnsteuertarif for
+                  €100k+, with Kindergeld €6,216/yr added to family net.
+                </li>
+                <li>
+                  <strong>Denmark (Copenhagen):</strong> all twelve cells were
+                  low by €2–9k. The prior values omitted{" "}
+                  <span className="font-mono">beskæftigelsesfradrag</span>
+                  {" "}(employment allowance, 12.30% capped at DKK 55,600) and
+                  used a slightly higher municipal rate. New values come from
+                  the salaryaftertax.com / klarpay.dk Copenhagen calculator
+                  cluster, family adds børneydelse 7-14 (€3,587/yr) plus spouse
+                  personfradrag transfer.
+                </li>
+                <li>
+                  <strong>Portugal (Lisbon):</strong> 70k family was high by
+                  ~€3k — the prior cell appears to have applied joint quotient
+                  benefits Portugal partially abolished in 2015. Patched to
+                  PwC math (€600 dependent deduction × 2 from coleta).
+                </li>
+              </ul>
+              All other city/cell pairs at €50k and €70k were verified within
+              ±€1k of the calculator/PwC value (Slovenia, Croatia, Estonia,
+              Spain, Netherlands, Ireland, Poland, UK, Switzerland).
             </li>
             <li>
               <strong className="text-stone-900">Estonia.</strong> The 24% rate planned
