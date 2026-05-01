@@ -627,43 +627,28 @@ export const cities: CityData[] = [
     currency: "EUR",
     salaries: {
       50000: {
-        single: { employerCost: 55500, net: 33400, taxCollected: 22100, wedge: 0.4 },
-        family: { employerCost: 55500, net: 39000, taxCollected: 16500, wedge: 0.3 },
+        single: { employerCost: 55700, net: 39600, taxCollected: 16100, wedge: 0.29 },
+        family: { employerCost: 55700, net: 44800, taxCollected: 10900, wedge: 0.2 },
       },
       70000: {
-        single: { employerCost: 77700, net: 44500, taxCollected: 33200, wedge: 0.43 },
-        family: { employerCost: 77700, net: 50500, taxCollected: 27200, wedge: 0.35 },
+        single: { employerCost: 77900, net: 50200, taxCollected: 27700, wedge: 0.36 },
+        family: { employerCost: 77900, net: 55900, taxCollected: 22000, wedge: 0.28 },
       },
       100000: {
-        single: { employerCost: 111300, net: 60000, taxCollected: 51300, wedge: 0.46 },
-        family: { employerCost: 111300, net: 67500, taxCollected: 43800, wedge: 0.39 },
+        single: { employerCost: 111300, net: 64500, taxCollected: 46800, wedge: 0.42 },
+        family: { employerCost: 111300, net: 70200, taxCollected: 41100, wedge: 0.37 },
       },
       150000: {
-        single: { employerCost: 167000, net: 84500, taxCollected: 82500, wedge: 0.49 },
-        family: { employerCost: 167000, net: 92000, taxCollected: 75000, wedge: 0.45 },
+        single: { employerCost: 167000, net: 88300, taxCollected: 78700, wedge: 0.47 },
+        family: { employerCost: 167000, net: 94100, taxCollected: 72900, wedge: 0.44 },
       },
       200000: {
-        single: {
-          employerCost: 222300,
-          net: 108500,
-          taxCollected: 113800,
-          wedge: 0.51,
-        },
-        family: {
-          employerCost: 222300,
-          net: 116500,
-          taxCollected: 105800,
-          wedge: 0.48,
-        },
+        single: { employerCost: 222700, net: 112200, taxCollected: 110500, wedge: 0.5 },
+        family: { employerCost: 222700, net: 118000, taxCollected: 104700, wedge: 0.47 },
       },
       250000: {
-        single: {
-          employerCost: 277500,
-          net: 134200,
-          taxCollected: 143300,
-          wedge: 0.52,
-        },
-        family: { employerCost: 277500, net: 138800, taxCollected: 138700, wedge: 0.5 },
+        single: { employerCost: 278300, net: 136100, taxCollected: 142200, wedge: 0.51 },
+        family: { employerCost: 278300, net: 141800, taxCollected: 136500, wedge: 0.49 },
       },
     },
     col: {
@@ -837,48 +822,28 @@ export const cities: CityData[] = [
     currency: "PLN",
     salaries: {
       50000: {
-        single: { employerCost: 60100, net: 36500, taxCollected: 23600, wedge: 0.39 },
-        family: { employerCost: 60100, net: 39200, taxCollected: 20900, wedge: 0.35 },
+        single: { employerCost: 60000, net: 31900, taxCollected: 28100, wedge: 0.47 },
+        family: { employerCost: 60000, net: 32400, taxCollected: 27600, wedge: 0.46 },
       },
       70000: {
-        single: { employerCost: 84200, net: 49100, taxCollected: 35100, wedge: 0.42 },
-        family: { employerCost: 84200, net: 51800, taxCollected: 32400, wedge: 0.39 },
+        single: { employerCost: 83300, net: 42300, taxCollected: 41000, wedge: 0.49 },
+        family: { employerCost: 83300, net: 42900, taxCollected: 40400, wedge: 0.48 },
       },
       100000: {
-        single: { employerCost: 119300, net: 67800, taxCollected: 51500, wedge: 0.43 },
-        family: { employerCost: 119300, net: 70500, taxCollected: 48800, wedge: 0.41 },
+        single: { employerCost: 114500, net: 59600, taxCollected: 54900, wedge: 0.48 },
+        family: { employerCost: 114500, net: 60100, taxCollected: 54400, wedge: 0.48 },
       },
       150000: {
-        single: { employerCost: 174800, net: 96600, taxCollected: 78200, wedge: 0.45 },
-        family: { employerCost: 174800, net: 99800, taxCollected: 75000, wedge: 0.43 },
+        single: { employerCost: 166500, net: 88400, taxCollected: 78100, wedge: 0.47 },
+        family: { employerCost: 166500, net: 88900, taxCollected: 77600, wedge: 0.47 },
       },
       200000: {
-        single: {
-          employerCost: 234400,
-          net: 125400,
-          taxCollected: 109000,
-          wedge: 0.47,
-        },
-        family: {
-          employerCost: 234400,
-          net: 129200,
-          taxCollected: 105200,
-          wedge: 0.45,
-        },
+        single: { employerCost: 218500, net: 117200, taxCollected: 101300, wedge: 0.46 },
+        family: { employerCost: 218500, net: 117700, taxCollected: 100800, wedge: 0.46 },
       },
       250000: {
-        single: {
-          employerCost: 295000,
-          net: 154800,
-          taxCollected: 140200,
-          wedge: 0.48,
-        },
-        family: {
-          employerCost: 295000,
-          net: 159200,
-          taxCollected: 135800,
-          wedge: 0.46,
-        },
+        single: { employerCost: 270500, net: 145200, taxCollected: 125300, wedge: 0.46 },
+        family: { employerCost: 270500, net: 145800, taxCollected: 124700, wedge: 0.46 },
       },
     },
     col: {
@@ -912,43 +877,28 @@ export const cities: CityData[] = [
     currency: "GBP",
     salaries: {
       50000: {
-        single: { employerCost: 56000, net: 37400, taxCollected: 18600, wedge: 0.33 },
-        family: { employerCost: 56000, net: 39600, taxCollected: 16400, wedge: 0.29 },
+        single: { employerCost: 56600, net: 40100, taxCollected: 16500, wedge: 0.29 },
+        family: { employerCost: 56600, net: 43000, taxCollected: 13600, wedge: 0.24 },
       },
       70000: {
-        single: { employerCost: 78400, net: 49800, taxCollected: 28600, wedge: 0.36 },
-        family: { employerCost: 78400, net: 51800, taxCollected: 26600, wedge: 0.34 },
+        single: { employerCost: 79600, net: 53000, taxCollected: 26600, wedge: 0.33 },
+        family: { employerCost: 79600, net: 55900, taxCollected: 23700, wedge: 0.3 },
       },
       100000: {
-        single: { employerCost: 110500, net: 66200, taxCollected: 44300, wedge: 0.4 },
-        family: { employerCost: 110500, net: 68200, taxCollected: 42300, wedge: 0.38 },
+        single: { employerCost: 114100, net: 70400, taxCollected: 43700, wedge: 0.38 },
+        family: { employerCost: 114100, net: 70700, taxCollected: 43400, wedge: 0.38 },
       },
       150000: {
-        single: { employerCost: 163500, net: 91000, taxCollected: 72500, wedge: 0.44 },
-        family: { employerCost: 163500, net: 92000, taxCollected: 71500, wedge: 0.44 },
+        single: { employerCost: 171600, net: 92600, taxCollected: 79000, wedge: 0.46 },
+        family: { employerCost: 171600, net: 92900, taxCollected: 78700, wedge: 0.46 },
       },
       200000: {
-        single: {
-          employerCost: 216500,
-          net: 116500,
-          taxCollected: 100000,
-          wedge: 0.46,
-        },
-        family: { employerCost: 216500, net: 117500, taxCollected: 99000, wedge: 0.46 },
+        single: { employerCost: 229100, net: 119100, taxCollected: 110000, wedge: 0.48 },
+        family: { employerCost: 229100, net: 119400, taxCollected: 109700, wedge: 0.48 },
       },
       250000: {
-        single: {
-          employerCost: 286500,
-          net: 152400,
-          taxCollected: 134100,
-          wedge: 0.47,
-        },
-        family: {
-          employerCost: 286500,
-          net: 154100,
-          taxCollected: 132400,
-          wedge: 0.46,
-        },
+        single: { employerCost: 286600, net: 145600, taxCollected: 141000, wedge: 0.49 },
+        family: { employerCost: 286600, net: 145900, taxCollected: 140700, wedge: 0.49 },
       },
     },
     col: {

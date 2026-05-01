@@ -53,8 +53,8 @@ const COPY: Record<string, { title: string; lede: string }> = {
     lede: "One income tax rate across the range. Employer social tax is heavy at 33%, but the flatness leaves the executive wedge unusually stable.",
   },
   Warsaw: {
-    title: "Two-rate PIT and a ZUS cap that flattens the top.",
-    lede: "12/32% above ~€28k, with social-security contributions tapering to almost nothing above the ~€60k ZUS base. The executive wedge sits below the headline rate.",
+    title: "Two-rate PIT, ZUS cap, and an uncapped 9% health levy.",
+    lede: "12/32% above ~€28k. ZUS contributions taper above the ~€66k cap, but the 9% non-deductible health levy applies to the full base — keeping the executive wedge in the high-40s rather than below the top bracket.",
   },
   London: {
     title: "A 60% trap between £100k and £125k. Then the ramp resumes.",
