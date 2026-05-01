@@ -1,6 +1,7 @@
 "use client";
 
 import { cities } from "@/lib/data";
+import { isoToFlag } from "@/lib/format";
 import { useHighlight } from "./HighlightContext";
 
 type Props = {
@@ -26,7 +27,7 @@ export function CityPicker({ variant = "inline" }: Props) {
       >
         {cities.map((c) => (
           <option key={c.name} value={c.name}>
-            {c.name}, {c.country}
+            {isoToFlag(c.iso)} {c.name}, {c.country}
           </option>
         ))}
       </select>

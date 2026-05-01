@@ -15,7 +15,7 @@ import { Section } from "./ui/Section";
 import { useHighlight } from "./ui/HighlightContext";
 import { Controls } from "./ui/Controls";
 import { realCities } from "@/lib/data";
-import { formatEUR, formatEURCompact, formatPercent } from "@/lib/format";
+import { formatEUR, formatEURCompact, formatPercent, isoToFlag } from "@/lib/format";
 import { CHART_COLORS, NET_STOPS, TAX_STOPS } from "@/lib/chart-style";
 
 export function StackedBarChart() {
@@ -28,6 +28,7 @@ export function StackedBarChart() {
       return {
         name: c.name,
         country: c.country,
+        iso: c.iso,
         net: cell.net,
         tax: cell.taxCollected,
         employerCost: cell.employerCost,
@@ -162,6 +163,7 @@ type TooltipProps = {
     payload: {
       name: string;
       country: string;
+      iso: string;
       net: number;
       tax: number;
       employerCost: number;
@@ -176,7 +178,7 @@ function CustomTooltip({ active, payload }: TooltipProps) {
   return (
     <div className="rounded-md border border-stone-200 bg-white p-3 text-xs shadow-md">
       <p className="mb-1 font-semibold text-stone-900">
-        {d.name} · {d.country}
+        {isoToFlag(d.iso)} {d.name} · {d.country}
       </p>
       <Row label="Cost to employer" value={formatEUR(d.employerCost)} bold />
       <Row label="To the state" value={formatEUR(d.tax)} taxAccent />

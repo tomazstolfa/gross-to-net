@@ -11,7 +11,7 @@ import {
   type CityData,
   type SalaryPoint,
 } from "@/lib/data";
-import { formatEUR, formatPercent, formatNumber } from "@/lib/format";
+import { formatEUR, formatPercent, formatNumber, isoToFlag } from "@/lib/format";
 
 type SortKey =
   | "name"
@@ -181,7 +181,12 @@ export function ComparisonTable() {
                         )}
                       </div>
                     </td>
-                    <td className="px-4 py-3">{city.country}</td>
+                    <td className="px-4 py-3">
+                      <span className="mr-1.5" aria-hidden>
+                        {isoToFlag(city.iso)}
+                      </span>
+                      {city.country}
+                    </td>
                     <td className="px-4 py-3 text-right tabular-nums">
                       {formatEUR(cell.employerCost)}
                     </td>
