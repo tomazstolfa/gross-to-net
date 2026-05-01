@@ -242,6 +242,28 @@ export function Methodology() {
               deferred severance to the employee, not state revenue.
             </li>
             <li>
+              <strong className="text-stone-900">High-salary deep validation — May 2026.</strong>{" "}
+              The €100k–€250k cells were re-checked against real national
+              calculators (brutto-netto-rechner.info for Berlin via direct
+              browser automation, talent.com for Barcelona via WebFetch) plus
+              first-principles bracket math from PwC parameters where calculators
+              were JS-only. Three calculator-verified Berlin samples (100k single
+              €58,030, 150k single €84,851, 250k single €140,541) all matched
+              the bracket-math agent within ±€100, which gave confidence to apply
+              the agent&apos;s formula values for the remaining Berlin cells.
+              Result: every Berlin cell at 100k+ moved by €3-5k; previous values
+              were systematically too generous (mis-applied Soli Freigrenze plus
+              under-counted Vorsorgepauschale). Amsterdam 100k+ updated using
+              first-principles 2026 brackets with the correct
+              <span className="font-mono"> arbeidskorting</span> (which the prior
+              compute fn was missing entirely). Barcelona 100k+ updated to
+              talent.com Cataluña values (Catalonia top 25.5% above €175k
+              autonomic + state combined). Tallinn family rows equalised to
+              single since the Estonian child tax credit was abolished in the
+              2024 reform. Ljubljana 250k corrected from PwC bracket math (50%
+              top kicks in at €78,016 and was being mis-applied above that).
+            </li>
+            <li>
               <strong className="text-stone-900">Estonia.</strong> The 24% rate planned
               for 2026 was cancelled by the Riigikogu in December 2025. The 22% flat
               rate is used.
