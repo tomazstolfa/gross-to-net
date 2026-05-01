@@ -60,6 +60,10 @@ const COPY: Record<string, { title: string; lede: string }> = {
     title: "A 60% trap between £100k and £125k. Then the ramp resumes.",
     lede: "Rates run 20/40/45%, but the personal-allowance withdrawal between £100k and £125k creates an effective 60% band. Employer NI is 15% with no ceiling.",
   },
+  Zurich: {
+    title: "Federal + canton + city stack, but the wedge stays under 40% even at €250k.",
+    lede: "Combined Swiss income tax (federal direct tax + Zurich canton at 99% × basis + Zurich city at 119% × basis) is far below most of the EU. Mandatory 2nd-pillar pension and accident insurance live outside the wedge but still reduce take-home.",
+  },
   "EU average": {
     title: "An aggregate, not a city. Useful as a baseline.",
     lede: "An illustrative blend of EU-27 outcomes from OECD Taxing Wages 2025. Real cities sit on either side; structural choices show up clearly in each one's panel.",

@@ -36,6 +36,7 @@ export type CountryISO =
   | "NL"
   | "DK"
   | "GB"
+  | "CH"
   | "EU"; // EU = aggregate, not a real city
 
 export interface CellData {
@@ -80,7 +81,7 @@ export interface CityData {
   country: string;
   iso: CountryISO;
   /** Native currency before EUR conversion */
-  currency: "EUR" | "GBP" | "PLN";
+  currency: "EUR" | "GBP" | "PLN" | "CHF";
   /** True if this entry is an aggregate (e.g. EU average) rather than a real city */
   isAggregate?: boolean;
   /** Tax cells, indexed by salary point and profile */
@@ -103,6 +104,7 @@ export const PROFILES: Profile[] = ["single", "family"];
 export const FX = {
   GBP_PER_EUR: 0.85,
   PLN_PER_EUR: 4.3,
+  CHF_PER_EUR: 0.94,
 };
 
 export const DATA_VINTAGE = "2026-04-30";
@@ -919,6 +921,62 @@ export const cities: CityData[] = [
         "Top 45% rate above £125,140 (~€147k)",
         "Employer NI 15% post-April 2025 reform, £5k threshold, no cap",
         "Marriage Allowance limited at this income; Child Benefit clawed back fully above £80k",
+      ],
+    },
+  },
+
+  // ---------------------------------------------------------------------------
+  // Switzerland — Zurich
+  // ---------------------------------------------------------------------------
+  {
+    name: "Zurich",
+    country: "Switzerland",
+    iso: "CH",
+    currency: "CHF",
+    salaries: {
+      50000: {
+        single: { employerCost: 54100, net: 42900, taxCollected: 11200, wedge: 0.21 },
+        family: { employerCost: 54100, net: 46000, taxCollected: 8100, wedge: 0.15 },
+      },
+      70000: {
+        single: { employerCost: 75700, net: 58400, taxCollected: 17300, wedge: 0.23 },
+        family: { employerCost: 75700, net: 62900, taxCollected: 12800, wedge: 0.17 },
+      },
+      100000: {
+        single: { employerCost: 108200, net: 80200, taxCollected: 28000, wedge: 0.26 },
+        family: { employerCost: 108200, net: 86800, taxCollected: 21400, wedge: 0.2 },
+      },
+      150000: {
+        single: { employerCost: 162300, net: 113200, taxCollected: 49100, wedge: 0.3 },
+        family: { employerCost: 162300, net: 123800, taxCollected: 38500, wedge: 0.24 },
+      },
+      200000: {
+        single: { employerCost: 216100, net: 143700, taxCollected: 72400, wedge: 0.34 },
+        family: { employerCost: 216100, net: 158600, taxCollected: 57500, wedge: 0.27 },
+      },
+      250000: {
+        single: { employerCost: 269900, net: 173100, taxCollected: 96800, wedge: 0.36 },
+        family: { employerCost: 269900, net: 191400, taxCollected: 78500, wedge: 0.29 },
+      },
+    },
+    col: {
+      rent2brCenter: 4170,
+      numbeoIdxExRent: 99,
+      bigMac: 7.55,
+      pint: 10.1,
+      transitMonthly: 90,
+      cappuccino: 5.55,
+    },
+    taxStructure: {
+      topBracketRate: 0.4,
+      topBracketThreshold: 319000,
+      ssCapEur: 139000,
+      notes: [
+        "Federal direct tax 0% to 11.5% top, married couples taxed jointly",
+        "Zurich canton 99% × cantonal basis tax + Zurich city 119% × basis (218% combined)",
+        "AHV/IV/EO 5.3% employee + 5.3% employer, uncapped",
+        "ALV 1.1% to CHF 148,200 (~€139k); 0.5% solidarity above (both sides)",
+        "BVG 2nd-pillar pension excluded — see methodology",
       ],
     },
   },
