@@ -242,50 +242,29 @@ export const cities: CityData[] = [
     iso: "PT",
     currency: "EUR",
     salaries: {
-      // 50000 computed from PwC 2026 brackets via scripts/compute-cells.ts.
       50000: {
-        single: { employerCost: 61900, net: 33100, taxCollected: 28800, wedge: 0.47 },
-        family: { employerCost: 61900, net: 34900, taxCollected: 27000, wedge: 0.44 },
+        single: { employerCost: 63500, net: 33100, taxCollected: 30400, wedge: 0.48 },
+        family: { employerCost: 63500, net: 34900, taxCollected: 28600, wedge: 0.45 },
       },
       70000: {
-        single: { employerCost: 86625, net: 43800, taxCollected: 42825, wedge: 0.49 },
-        family: { employerCost: 86625, net: 44200, taxCollected: 42425, wedge: 0.49 },
+        single: { employerCost: 88800, net: 43800, taxCollected: 45000, wedge: 0.51 },
+        family: { employerCost: 88800, net: 44200, taxCollected: 44600, wedge: 0.5 },
       },
       100000: {
-        single: { employerCost: 123750, net: 58200, taxCollected: 65550, wedge: 0.53 },
-        family: { employerCost: 123750, net: 62400, taxCollected: 61350, wedge: 0.5 },
+        single: { employerCost: 126900, net: 58200, taxCollected: 68700, wedge: 0.54 },
+        family: { employerCost: 126900, net: 62400, taxCollected: 64500, wedge: 0.51 },
       },
       150000: {
-        single: { employerCost: 185625, net: 81400, taxCollected: 104225, wedge: 0.56 },
-        family: { employerCost: 185625, net: 86500, taxCollected: 99125, wedge: 0.53 },
+        single: { employerCost: 190400, net: 81400, taxCollected: 109000, wedge: 0.57 },
+        family: { employerCost: 190400, net: 86500, taxCollected: 103900, wedge: 0.55 },
       },
       200000: {
-        single: {
-          employerCost: 247500,
-          net: 104500,
-          taxCollected: 143000,
-          wedge: 0.58,
-        },
-        family: {
-          employerCost: 247500,
-          net: 109800,
-          taxCollected: 137700,
-          wedge: 0.56,
-        },
+        single: { employerCost: 253800, net: 104500, taxCollected: 149300, wedge: 0.59 },
+        family: { employerCost: 253800, net: 109800, taxCollected: 144000, wedge: 0.57 },
       },
       250000: {
-        single: {
-          employerCost: 309400,
-          net: 127600,
-          taxCollected: 181800,
-          wedge: 0.59,
-        },
-        family: {
-          employerCost: 309400,
-          net: 132800,
-          taxCollected: 176600,
-          wedge: 0.57,
-        },
+        single: { employerCost: 317300, net: 127600, taxCollected: 189700, wedge: 0.6 },
+        family: { employerCost: 317300, net: 132800, taxCollected: 184500, wedge: 0.58 },
       },
     },
     col: {
@@ -303,7 +282,7 @@ export const cities: CityData[] = [
       notes: [
         "IRS top bracket 48% above €86,634 (PwC 2026)",
         "Solidarity surcharge 2.5% on €80k–€250k slice; 5% above €250k",
-        "Employer Social Security (TSU) 23.75%, uncapped",
+        "Employer Social Security 26.90% (TSU 23.75% + work-accident 3.15%), uncapped",
         "Employee SS 11%",
         "NHR ended for new applicants Jan 2024; IFICI replacement is R&D/qualifying-activities only",
       ],
@@ -377,50 +356,29 @@ export const cities: CityData[] = [
     iso: "NL",
     currency: "EUR",
     salaries: {
-      // 50000 computed from PwC 2026 brackets via scripts/compute-cells.ts.
       50000: {
-        single: { employerCost: 57000, net: 33400, taxCollected: 23600, wedge: 0.41 },
-        family: { employerCost: 57000, net: 35900, taxCollected: 21100, wedge: 0.37 },
+        single: { employerCost: 58800, net: 33400, taxCollected: 25400, wedge: 0.43 },
+        family: { employerCost: 58800, net: 35900, taxCollected: 22900, wedge: 0.39 },
       },
       70000: {
-        single: { employerCost: 82500, net: 43000, taxCollected: 39500, wedge: 0.48 },
-        family: { employerCost: 82500, net: 47000, taxCollected: 35500, wedge: 0.43 },
+        single: { employerCost: 82400, net: 43000, taxCollected: 39400, wedge: 0.48 },
+        family: { employerCost: 82400, net: 47000, taxCollected: 35400, wedge: 0.43 },
       },
       100000: {
         single: { employerCost: 113500, net: 57500, taxCollected: 56000, wedge: 0.49 },
         family: { employerCost: 113500, net: 61500, taxCollected: 52000, wedge: 0.46 },
       },
       150000: {
-        single: { employerCost: 161500, net: 83000, taxCollected: 78500, wedge: 0.49 },
-        family: { employerCost: 161500, net: 87000, taxCollected: 74500, wedge: 0.46 },
+        single: { employerCost: 163500, net: 83000, taxCollected: 80500, wedge: 0.49 },
+        family: { employerCost: 163500, net: 87000, taxCollected: 76500, wedge: 0.47 },
       },
       200000: {
-        single: {
-          employerCost: 211500,
-          net: 107500,
-          taxCollected: 104000,
-          wedge: 0.49,
-        },
-        family: {
-          employerCost: 211500,
-          net: 111500,
-          taxCollected: 100000,
-          wedge: 0.47,
-        },
+        single: { employerCost: 213500, net: 107500, taxCollected: 106000, wedge: 0.5 },
+        family: { employerCost: 213500, net: 111500, taxCollected: 102000, wedge: 0.48 },
       },
       250000: {
-        single: {
-          employerCost: 268000,
-          net: 138900,
-          taxCollected: 129100,
-          wedge: 0.48,
-        },
-        family: {
-          employerCost: 268000,
-          net: 142200,
-          taxCollected: 125800,
-          wedge: 0.47,
-        },
+        single: { employerCost: 263500, net: 138900, taxCollected: 124600, wedge: 0.47 },
+        family: { employerCost: 263500, net: 142200, taxCollected: 121300, wedge: 0.46 },
       },
     },
     col: {
@@ -434,11 +392,11 @@ export const cities: CityData[] = [
     taxStructure: {
       topBracketRate: 0.495,
       topBracketThreshold: 78426,
-      ssCapEur: 71000,
+      ssCapEur: 76300,
       notes: [
         "Box 1 income tax + Zvw health insurance",
         "Top bracket 49.5% above €78,426 (PwC 2026)",
-        "Employer SS effectively caps near €71k",
+        "Employer SS 17.65% (WW Awf 2.74% + WIA-Aof 7.05% + Zvw 6.51% + WHK ~1.35%) capped at €76,300; nothing above",
         "30% ruling not applied; with ruling (2024 phasing 30/20/10), €100k single nets ~€68k",
       ],
     },
@@ -453,45 +411,29 @@ export const cities: CityData[] = [
     iso: "ES",
     currency: "EUR",
     salaries: {
-      // 50000 computed from PwC 2025 brackets via scripts/compute-cells.ts.
       50000: {
-        single: { employerCost: 65300, net: 35300, taxCollected: 30000, wedge: 0.46 },
-        family: { employerCost: 65300, net: 37800, taxCollected: 27500, wedge: 0.42 },
+        single: { employerCost: 66000, net: 35300, taxCollected: 30700, wedge: 0.47 },
+        family: { employerCost: 66000, net: 37800, taxCollected: 28200, wedge: 0.43 },
       },
       70000: {
-        single: { employerCost: 91000, net: 47000, taxCollected: 44000, wedge: 0.48 },
-        family: { employerCost: 91000, net: 49500, taxCollected: 41500, wedge: 0.46 },
+        single: { employerCost: 89700, net: 47000, taxCollected: 42700, wedge: 0.48 },
+        family: { employerCost: 89700, net: 49500, taxCollected: 40200, wedge: 0.45 },
       },
       100000: {
-        single: { employerCost: 123300, net: 63500, taxCollected: 59800, wedge: 0.49 },
-        family: { employerCost: 123300, net: 66000, taxCollected: 57300, wedge: 0.46 },
+        single: { employerCost: 120000, net: 63500, taxCollected: 56500, wedge: 0.47 },
+        family: { employerCost: 120000, net: 66000, taxCollected: 54000, wedge: 0.45 },
       },
       150000: {
-        single: { employerCost: 165800, net: 89000, taxCollected: 76800, wedge: 0.46 },
-        family: { employerCost: 165800, net: 91500, taxCollected: 74300, wedge: 0.45 },
+        single: { employerCost: 170600, net: 89000, taxCollected: 81600, wedge: 0.48 },
+        family: { employerCost: 170600, net: 91500, taxCollected: 79100, wedge: 0.46 },
       },
       200000: {
-        single: {
-          employerCost: 215800,
-          net: 113500,
-          taxCollected: 102300,
-          wedge: 0.47,
-        },
-        family: { employerCost: 215800, net: 116000, taxCollected: 99800, wedge: 0.46 },
+        single: { employerCost: 221200, net: 113500, taxCollected: 107700, wedge: 0.49 },
+        family: { employerCost: 221200, net: 116000, taxCollected: 105200, wedge: 0.48 },
       },
       250000: {
-        single: {
-          employerCost: 282000,
-          net: 132500,
-          taxCollected: 149500,
-          wedge: 0.53,
-        },
-        family: {
-          employerCost: 282000,
-          net: 137200,
-          taxCollected: 144800,
-          wedge: 0.51,
-        },
+        single: { employerCost: 271800, net: 132500, taxCollected: 139300, wedge: 0.51 },
+        family: { employerCost: 271800, net: 137200, taxCollected: 134600, wedge: 0.5 },
       },
     },
     col: {
@@ -505,10 +447,11 @@ export const cities: CityData[] = [
     taxStructure: {
       topBracketRate: 0.5,
       topBracketThreshold: 175000,
-      ssCapEur: 59000,
+      ssCapEur: 61224,
       notes: [
         "National + Catalonia regional brackets, top 50% above ~€175k",
-        "Employer SS ~30% capped at ~€59k base; above cap, ~7% solidarity charge applies",
+        "Employer SS 31.98% (common contingencies 23.6% + unemployment 5.5% + IT/death 1.5% + MEI 0.75% + training 0.6% + FOGASA 0.2%)",
+        "Capped at €61,224 (2026 max base); above cap, 1.2% solidarity charge applies",
         "Catalonia 2024 reform applied",
       ],
     },

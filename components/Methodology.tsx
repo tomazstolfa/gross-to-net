@@ -211,6 +211,37 @@ export function Methodology() {
               Spain, Netherlands, Ireland, Poland, UK, Switzerland).
             </li>
             <li>
+              <strong className="text-stone-900">Cross-check against Deel — May 2026.</strong>{" "}
+              Employer-cost figures cross-checked against Deel&apos;s public
+              hiring-page rates (deel.com/hiring/employees/[country]/) for all
+              13 real cities. Ten countries matched within 2%; three needed
+              employer-side fixes that have now been applied:
+              <ul className="ml-5 mt-2 list-disc space-y-1">
+                <li>
+                  <strong>Netherlands:</strong> bumped employer SS from 14.0%
+                  to 17.65% capped at €76,300 (added WW Awf 2.74% + WIA-Aof
+                  7.05% + WHK ~1.35% on top of Zvw 6.51%).
+                </li>
+                <li>
+                  <strong>Portugal:</strong> bumped employer SS from 23.75%
+                  to 26.90% (added work-accident insurance 3.15%).
+                </li>
+                <li>
+                  <strong>Spain:</strong> bumped employer SS from 30.65% to
+                  31.98% capped at €61,224 (added FOGASA 0.20% + training
+                  0.60% + IT/death 0.40% + Aprendizaje 0.13%).
+                </li>
+              </ul>
+              Three other Deel deltas were intentional methodology choices
+              and were left unchanged: <strong>UK</strong> excludes pension
+              auto-enrol (3%) and apprenticeship levy (0.5% only applies to
+              £3M+ employers); <strong>Denmark</strong> treats the 12.5%
+              holiday accrual as embedded in gross compensation (Feriekonto
+              is employee deferred pay, not state revenue);
+              {" "}<strong>Italy</strong> excludes TFR (~6.91%) which is
+              deferred severance to the employee, not state revenue.
+            </li>
+            <li>
               <strong className="text-stone-900">Estonia.</strong> The 24% rate planned
               for 2026 was cancelled by the Riigikogu in December 2025. The 22% flat
               rate is used.
