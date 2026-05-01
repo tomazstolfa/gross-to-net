@@ -36,8 +36,8 @@ const COLUMNS: ColumnDef[] = [
   { key: "name", label: "City", align: "left", defaultDir: "asc" },
   { key: "country", label: "Country", align: "left", defaultDir: "asc" },
   { key: "employerCost", label: "Employer cost", align: "right", defaultDir: "desc" },
-  { key: "taxCollected", label: "Tax collected", align: "right", defaultDir: "desc" },
   { key: "net", label: "Net", align: "right", defaultDir: "desc" },
+  { key: "taxCollected", label: "Tax collected", align: "right", defaultDir: "desc" },
   { key: "wedge", label: "Wedge", align: "right", defaultDir: "desc" },
   { key: "eurPerEuroNet", label: "€ / €1 net", align: "right", defaultDir: "desc" },
   { key: "realNet", label: "Real net (PPP)", align: "right", defaultDir: "desc" },
@@ -190,11 +190,11 @@ export function ComparisonTable() {
                     <td className="px-4 py-3 text-right tabular-nums">
                       {formatEUR(cell.employerCost)}
                     </td>
-                    <td className="px-4 py-3 text-right tabular-nums">
-                      {formatEUR(cell.taxCollected)}
-                    </td>
-                    <td className="px-4 py-3 text-right font-semibold tabular-nums text-stone-900">
+                    <td className="px-4 py-3 text-right font-semibold tabular-nums text-emerald-700">
                       {formatEUR(cell.net)}
+                    </td>
+                    <td className="px-4 py-3 text-right tabular-nums text-red-700">
+                      {formatEUR(cell.taxCollected)}
                     </td>
                     <td className="px-4 py-3 text-right tabular-nums">
                       {formatPercent(cell.wedge)}
