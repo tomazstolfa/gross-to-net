@@ -361,7 +361,7 @@ function computeGB(gross: number, profile: "single" | "family") {
   const marriageCredit = profile === "family" ? 252 : 0;
   // Child benefit: clawed back fully above £80k single earner; for €100k+ → zero
   const childBenefitGBP = profile === "family" && grossGBP < 60000 ? 1331 + 881 : 0;
-  const netGBP = grossGBP - incomeTax - ni - marriageCredit + childBenefitGBP;
+  const netGBP = grossGBP - incomeTax - ni + marriageCredit + childBenefitGBP;
   // Employer NIC 15% above £5k threshold, no cap
   const employerNI = Math.max(0, grossGBP - 5000) * 0.15;
   const employerCostGBP = grossGBP + employerNI;
